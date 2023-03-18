@@ -1,7 +1,7 @@
 /*
  * UART_Lcfg.c
  *
- *  Created on: ??þ/??þ/????
+ *  Created on: ??ï¿½/??ï¿½/????
  *      Author: ahmed
  */
 
@@ -10,7 +10,7 @@
 
 
 S_UART_config_t UART_config = {
-		UART_BRate_57k6 ,
+		UART_BRate_115k2 ,
 		UART_wordLength_8bit ,
 		UART_Parity_disable ,
 		UART_stopBits_1

@@ -1,0 +1,25 @@
+/*
+ * WIFI_init.h
+ *
+ *  Created on: Mar 8, 2023
+ *      Author: alish
+ */
+#include "WIFI_priv.h"
+#include "WIFI_types.h"
+#include "WIFI_cfg.h"
+#ifndef WIFI_WIFI_INIT_H_
+#define WIFI_WIFI_INIT_H_
+
+void H_WIFI_void_WIFIInit(S_WIFI_Config_t S_WIFI_Config );
+WIFI_TCPCommand_t H_WIFI_TCPCommand_t_TCPCommand(char *StrReceved );
+void H_WIFI_void_StartTCPServer(void );
+
+void APP_void_WIFIreceive(char *recevBuffer);
+
+WIFI_command_statue_t H_WIFI_statue_t_cheakOk(char *response);
+WIFI_command_statue_t H_WIFI_command_statue_t_sendData(char* command,char* response ,const int timeout);
+
+
+#endif /* WIFI_WIFI_INIT_H_ */
+
+

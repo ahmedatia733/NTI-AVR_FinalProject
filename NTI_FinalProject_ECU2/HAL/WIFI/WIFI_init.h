@@ -13,6 +13,9 @@
 void H_WIFI_void_WIFIInit(S_WIFI_Config_t S_WIFI_Config );
 WIFI_TCPCommand_t H_WIFI_TCPCommand_t_TCPCommand(char *StrReceved );
 void H_WIFI_void_StartTCPServer(void );
+
+WIFI_Receive_statue_t H_WIFI_ReceiveStatue_t_WIFIreceive(char *recevBuffer);
+
 WIFI_command_statue_t H_WIFI_statue_t_cheakOk(char *response);
 WIFI_command_statue_t H_WIFI_command_statue_t_sendData(char* command,char* response ,const int timeout);
 

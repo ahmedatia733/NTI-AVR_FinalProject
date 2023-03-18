@@ -9,8 +9,14 @@
 #define SMARTHOME_SMARTHOME_INIT_H_
 
 #include "STD_TYPES.h"
+//#include "LDR_interface.h"
+//#include "LDR_config.h"
+#include "string.h"
+#include "WIFI_init.h"
+
 #include "SmartHome_priv.h"
 #include "SmartHome_types.h"
+
 
 
 /*Functions Prototypes*/
@@ -24,6 +30,8 @@ void APP_SmartHome_void_UpdateAppliance();
 APP_COMMAND_ERROR_t APP_SmartHome_ERROR_t_GetAppliancesState(APP_Command_t command);
 
 /*TCP functions prototypes*/
+void APP_void_StartWIFIserver(void);
+APP_WIFI_UpdateStatus_t APP_UpdateStatus_t_WIFIUpdate(char *recevBuffer);
 APP_COMMAND_ERROR_t APP_SmartHome_ERROR_t_GetCommand(u8* msgArray, APP_Command_t* command);
 
 #endif /* SMARTHOME_SMARTHOME_INIT_H_ */

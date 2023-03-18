@@ -1,0 +1,91 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+#define F_CPU 16000000UL
+#include <util/delay.h>
+
+
+/*LIB*/
+#include "STD_TYPES.h"
+/*MCAL*/
+#include "Port_int.h"
+#include "GIE_interface.h"
+#include "CLCD_int.h"
+
+/*Application Includes*/
+#include "SmartHome_init.h"
+
+
+/*WIFI includes*/
+
+
+
+/* Global Externs */
+extern const Port_Configtype Port_ConfigArr[PORT_PINS_CONFIG_ARR_SIZE];
+
+
+
+
+int main(){
+char buff[100]= {0};
+
+	/* Module Initialization */
+/*
+M_GIE_void_EnableGlobalInterrupt();
+M_PORT_voidInit(Port_ConfigArr);*/
+H_CLCD_voidInit();
+/*
+APP_SmartHome_void_LightIntensity_init();
+APP_void_StartWIFIserver();*/
+H_CLCD_voidSendString("test");
+/*
+//timer
+TIMER0_config_t timer0;
+*/
+
+
+/*
+M_TIMER0_void_StartFastPWM(50, 10);
+APP_void_LedIntensity_LDR_init();
+*/
+
+//H_LM35_void_Init();
+
+//u16 res;
+//u16 resOVER40;
+//M_TIMER0_void_StartFastPWM(100, 100);
+
+
+while(1){
+
+/*
+	if (APP_UpdateStatus_t_WIFIUpdate(buff) == APP_WIFI_Updated){
+		H_CLCD_voidClearDisplay();
+		H_CLCD_voidSendString(buff);*/
+	}
+	//LDR app
+	/*H_CLCD_voidClearDisplay();
+
+	res = APP_void_LedIntensity_GetLevelFromLDR();
+	M_TIMER0_void_StartFastPWM(100, res);
+
+	H_CLCD_void_Send_u32Num(res);
+
+	_delay_ms(10);*/
+
+
+	/*//LM35 app
+	H_CLCD_voidClearDisplay();
+	H_CLCD_void_Send_u32Num(APP_SmartHome_u8_GetIntensityLevel());
+	_delay_ms(1000);*/
+
+
+}
+
+
+
+return 0;
+}

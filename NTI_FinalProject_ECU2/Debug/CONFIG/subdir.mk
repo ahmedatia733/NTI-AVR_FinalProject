@@ -8,6 +8,7 @@ C_SRCS += \
 ../CONFIG/DC_MOTOR_Lconfig.c \
 ../CONFIG/Dio_Lcfg.c \
 ../CONFIG/EX_INT_Lconfig.c \
+../CONFIG/LCD_Lcfg.c \
 ../CONFIG/LDR_Lconfig.c \
 ../CONFIG/LM35_Lconfig.c \
 ../CONFIG/Port_Lcfg.c \
@@ -20,6 +21,7 @@ OBJS += \
 ./CONFIG/DC_MOTOR_Lconfig.o \
 ./CONFIG/Dio_Lcfg.o \
 ./CONFIG/EX_INT_Lconfig.o \
+./CONFIG/LCD_Lcfg.o \
 ./CONFIG/LDR_Lconfig.o \
 ./CONFIG/LM35_Lconfig.o \
 ./CONFIG/Port_Lcfg.o \
@@ -32,6 +34,7 @@ C_DEPS += \
 ./CONFIG/DC_MOTOR_Lconfig.d \
 ./CONFIG/Dio_Lcfg.d \
 ./CONFIG/EX_INT_Lconfig.d \
+./CONFIG/LCD_Lcfg.d \
 ./CONFIG/LDR_Lconfig.d \
 ./CONFIG/LM35_Lconfig.d \
 ./CONFIG/Port_Lcfg.d \
@@ -44,7 +47,7 @@ C_DEPS += \
 CONFIG/%.o: ../CONFIG/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: AVR Compiler'
-	avr-gcc -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\APP" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\APP\SmartHome" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\APP\millis" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\WIFI" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\UART" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\CLCD" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\DC_MOTOR" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\LDR" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\LM35" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\LIB" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\ADC" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\DIO" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\EX_INT" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\GIE" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\PORT" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\TIM" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\Services" -I"C:\WinAVR-20100110\avr\include" -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	avr-gcc -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\APP" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG\APPCfg" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\APP\SmartHome" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\APP\millis" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\WIFI" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\UART" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\DC_MOTOR" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\LDR" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL\LM35" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\LIB" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\ADC" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\DIO" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\EX_INT" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\GIE" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\PORT" -I"F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\Services" -I"C:\WinAVR-20100110\avr\include" -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

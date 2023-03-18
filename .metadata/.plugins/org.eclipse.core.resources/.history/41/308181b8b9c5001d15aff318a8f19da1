@@ -1,0 +1,51 @@
+/*
+ * APP.c
+ *
+ *  Created on: ??�/??�/????
+ *      Author: ahmed
+ */
+#include <avr/delay.h>
+#include "Port_int.h"
+#include "LCD_int.h"
+#include "LED_int.h"
+#include "RELAY/relay_init.h"
+#include "UART/UART_init.h"
+#include "WIFI/WIFI_init.h"
+#include "stdio.h"
+
+extern S_UART_config_t UART_config;
+extern Port_ConfigType Port_config_Arr[PORT_PINS_CONFIG_ARR_SIZE];
+extern S_WIFI_Config_t WIFI_Config;
+char buff[100];
+int main() {
+	Port_Init(Port_config_Arr);
+	H_LCD_void_Int();
+	H_LCD_void_sendString("test");
+	M_UART_void_UARTInit(UART_config);
+	__asm__ __volatile__ ("sei" ::);
+
+	H_WIFI_void_WIFIInit(WIFI_Config);
+	H_WIFI_void_StartTCPServer();
+
+	while (1) {
+		if (M_UART_void_UARTAvalepale()) {
+			H_LCD_void_Clear();
+			M_UART_void_ReceiveString(buff);
+			WIFI_TCPCommand_t Command = H_WIFI_TCPCommand_t_TCPCommand(buff);
+			if (Command == TCPCommand_RelayON) {
+				//H_relay_void_ON(relayID_1);
+				//H_LED_void_turnON(LED_RED);
+				H_LCD_void_sendString("RELAY ON");
+			} else if (Command == TCPCommand_RelayOFF) {
+				//H_relay_void_OFF(relayID_1);
+				//H_LED_void_turnOFF(LED_RED);
+				H_LCD_void_sendString("RELAY OFF");
+
+			}
+			_delay_ms(2000);
+
+		}
+	}
+
+}
+

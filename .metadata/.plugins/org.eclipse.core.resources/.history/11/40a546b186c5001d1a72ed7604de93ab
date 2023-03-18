@@ -1,0 +1,38 @@
+/*
+ * WIFI_types.h
+ *
+ *  Created on: Mar 8, 2023
+ *      Author: alish
+ */
+
+#ifndef WIFI_WIFI_TYPES_H_
+#define WIFI_WIFI_TYPES_H_
+
+typedef enum {
+	WIFI_command_ok, WIFI_command_error, WIFI_command_timeOute
+
+} WIFI_command_statue_t;
+
+typedef enum {
+	WIFI_Station = 1, WIFI_AP, WIFI_APStation
+
+} WIFI_Mode_t;
+
+typedef struct {
+	WIFI_Mode_t WIFI_Mode;
+	const char * ssid;
+	const char * password;
+	const char * IP;
+} S_WIFI_Config_t;
+
+typedef enum {
+	TCPCommand_NULL ,TCPCommand_RelayON, TCPCommand_RelayOFF
+
+} WIFI_TCPCommand_t;
+
+typedef enum {
+	TCPCommand_NULL ,TCPCommand_RelayON, TCPCommand_RelayOFF
+
+} WIFI_Receive_statue_t;
+
+#endif /* WIFI_WIFI_TYPES_H_ */

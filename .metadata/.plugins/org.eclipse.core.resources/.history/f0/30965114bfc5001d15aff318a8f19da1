@@ -1,0 +1,66 @@
+/*
+ * APP.c
+ *
+ *  Created on: ??�/??�/????
+ *      Author: ahmed
+ */
+#include <avr/delay.h>
+#include "Port_int.h"
+#include "LCD/LCD_int.h"
+//#include "LED_int.h"
+//#include "RELAY/relay_init.h"
+#include "SmartHome_init.h"
+#include "UART/UART_init.h"
+#include "WIFI/WIFI_init.h"
+#include "stdio.h"
+
+extern S_UART_config_t UART_config;
+extern const Port_Configtype Port_ConfigArr[PORT_PINS_CONFIG_ARR_SIZE];
+extern S_WIFI_Config_t WIFI_Config;
+char buff[100];
+int main() {
+	M_PORT_voidInit(Port_ConfigArr);
+	H_LCD_void_Int();
+	H_LCD_void_sendString("test");
+
+	__asm__ __volatile__ ("sei" ::);
+
+	APP_void_StartWIFIserver();
+	_delay_ms(2000);
+	H_LCD_void_Clear();
+	H_LCD_void_sendString("waiting new user");
+	while(1){
+
+
+		//if (APP_UpdateStatus_t_WIFIUpdate(buff) == APP_WIFI_Updated){
+			//H_LCD_void_Clear();
+			//H_LCD_void_sendString(buff);
+			//_delay_ms(2000);
+		//}
+		if(M_UART_void_UARTAvalepale() > 0)
+		{
+
+		}
+		//LDR app
+		/*H_CLCD_voidClearDisplay();
+
+		res = APP_void_LedIntensity_GetLevelFromLDR();
+		M_TIMER0_void_StartFastPWM(100, res);
+
+		H_CLCD_void_Send_u32Num(res);
+
+		_delay_ms(10);*/
+
+
+		/*//LM35 app
+		H_CLCD_voidClearDisplay();
+		H_CLCD_void_Send_u32Num(APP_SmartHome_u8_GetIntensityLevel());
+		_delay_ms(1000);*/
+
+
+
+
+		}
+
+	return 0;
+	}

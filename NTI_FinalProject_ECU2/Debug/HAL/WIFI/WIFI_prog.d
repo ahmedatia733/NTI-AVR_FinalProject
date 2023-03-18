@@ -17,7 +17,8 @@ HAL/WIFI/WIFI_prog.o HAL/WIFI/WIFI_prog.o: ../HAL/WIFI/WIFI_prog.c \
   C:\WinAVR-20100110\avr\include/stdint.h \
   C:\WinAVR-20100110\avr\include/util/delay_basic.h \
   C:\WinAVR-20100110\avr\include/stdio.h \
-  C:\WinAVR-20100110\avr\include/string.h
+  C:\WinAVR-20100110\avr\include/string.h \
+  F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL/LCD/LCD_int.h
 
 F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\UART/UART_init.h:
 
@@ -58,3 +59,5 @@ C:\WinAVR-20100110\avr\include/util/delay_basic.h:
 C:\WinAVR-20100110\avr\include/stdio.h:
 
 C:\WinAVR-20100110\avr\include/string.h:
+
+F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\HAL/LCD/LCD_int.h:

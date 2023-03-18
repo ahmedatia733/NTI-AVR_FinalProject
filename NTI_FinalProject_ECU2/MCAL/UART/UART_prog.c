@@ -96,18 +96,18 @@ void M_UART_void_UARTSendBytes(u8* byteArr , u8 Arrlength)
 }
 
 void M_UART_void_ReceiveString(char *strPtr) {
-	init_millis(16000000);
+	//init_millis(16000000);
 	int counter = 0;
-	long int time = millis();
-	while (1) {
-		if ((time + 2000) < millis())
-			break;
-		while (RX_Counter_UART) {
+	//long int time = millis();
+	//while (1) {
+		//if ((time + 500) < millis())
+			//break;
+		while (RX_Counter_UART > 0) {
 			*(strPtr + counter) = M_UART_u8_receiveByteASynchNonBlocking();
 			if (*(strPtr + counter))
 				counter++;
 		}
-	}
+	//}
 
 	*(strPtr + counter) = 0;
 

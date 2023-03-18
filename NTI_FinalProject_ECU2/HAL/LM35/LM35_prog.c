@@ -8,7 +8,7 @@
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
-#include "CLCD_int.h"
+//#include "CLCD_int.h"
 
 extern ADC_config_t LM35_ADC_config_struct;
 

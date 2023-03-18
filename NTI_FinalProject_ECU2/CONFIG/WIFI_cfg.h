@@ -7,7 +7,7 @@
 
 #ifndef WIFI_CFG_H_
 #define WIFI_CFG_H_
-#define WIFI_DEBUG 0
+#define WIFI_DEBUG 1
 
 
 #define TCP_SERVER_IP "192.168.1.100"

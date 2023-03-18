@@ -30,4 +30,9 @@ typedef enum {
 
 } WIFI_TCPCommand_t;
 
+typedef enum {
+	WIFI_Data_Receved ,WIFI_NO_data_receved
+
+} WIFI_Receive_statue_t;
+
 #endif /* WIFI_WIFI_TYPES_H_ */

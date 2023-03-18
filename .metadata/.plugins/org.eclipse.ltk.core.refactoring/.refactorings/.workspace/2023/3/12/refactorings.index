@@ -2,3 +2,6 @@
 1679130335827	Delete resource 'NTI_FinalProject_ECU2/APP/APP_types.h'
 1679130383709	Delete resource 'NTI_FinalProject_ECU2/APP/WifiBroker'
 1679130753467	Delete resource 'NTI_FinalProject_ECU2/APP/LedIntensity'
+1679145594361	Delete resource 'NTI_FinalProject_ECU2/CONFIG/LCD'
+1679146454461	Delete resource 'NTI_FinalProject_ECU2/HAL/CLCD'
+1679163544732	Delete resource 'NTI_FinalProject_ECU2/MCAL/TIM'

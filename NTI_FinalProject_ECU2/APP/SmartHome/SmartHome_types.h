@@ -57,21 +57,27 @@ typedef enum{
 }APP_COMMAND_ERROR_t;
 
 
+typedef enum
+{
+	APP_WIFI_Updated ,
+	APP_WIFI_NO_Update
+}APP_WIFI_UpdateStatus_t;
+
 /*Structs*/
 typedef struct{
 
-	u8 device_name[4];
-	u8 device_mode[2];
-	u8 device_state[4];
-	u8 value[3];
-	u8 update_flag;
+	char device_name[4];
+	char device_mode[2];
+	char device_state[4];
+	char value[3];
+	char update_flag;
 
 }APP_Device_t;
 
 typedef struct{
-	u8 device_name[4]; //LED , FAN
-	u8 command_type[3];   //AV  , DV  , M
-	u8 value[3];	   //"0" : "100"
+	char device_name[4]; //LED , FAN
+	char command_type[3];   //AV  , DV  , M
+	char value[3];	   //"0" : "100"
 }APP_Command_t;
 
 #endif /* APP_TYPES_H_ */

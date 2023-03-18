@@ -14,17 +14,19 @@
 #include "string.h"
 
 #if(WIFI_DEBUG)
-#include "LCD_int.h"
+#include "LCD/LCD_int.h"
 #endif
 
 extern u8 RX_Counter_UART;
+extern S_UART_config_t UART_config  ;
 
 char buff[100];
 
 void H_WIFI_void_WIFIInit(S_WIFI_Config_t S_WIFI_Config) {
-	//configuar UART here
-	char command[100];
 
+	char command[100];
+	M_UART_void_UARTInit(UART_config);
+	//_delay_ms(500);
 	sprintf(command, "AT+CWMODE=%d\r\n", S_WIFI_Config.WIFI_Mode);
 	WIFI_command_statue_t command_statue = H_WIFI_command_statue_t_sendData(
 			command, buff, 2000);
@@ -142,4 +144,16 @@ WIFI_TCPCommand_t H_WIFI_TCPCommand_t_TCPCommand(char *StrReceved) {
 	}
 
 	return TCPCommand_NULL;
+}
+
+
+
+WIFI_Receive_statue_t H_WIFI_ReceiveStatue_t_WIFIreceive(char *recevBuffer)
+{
+	if(M_UART_void_UARTAvalepale() > 0)
+	{
+		M_UART_void_ReceiveString(recevBuffer);
+		return WIFI_Data_Receved;
+	}
+	return WIFI_NO_data_receved;
 }

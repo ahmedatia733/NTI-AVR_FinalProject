@@ -5,6 +5,6 @@
  *      Author: alish
  */
 
-#include "WIFI_init.h"
+#include "WIFI_types.h"
 S_WIFI_Config_t WIFI_Config = { WIFI_Station, "test", "12345678",
 		"192.168.1.100" };
