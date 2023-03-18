@@ -24,6 +24,7 @@ APP/SmartHome \
 APP \
 APP/millis \
 CONFIG \
+CONFIG/APPCfg \
 HAL/CLCD \
 HAL/DC_MOTOR \
 HAL/LDR \

@@ -20,6 +20,7 @@ RM := rm -rf
 -include HAL/LDR/subdir.mk
 -include HAL/DC_MOTOR/subdir.mk
 -include HAL/CLCD/subdir.mk
+-include CONFIG/APPCfg/subdir.mk
 -include CONFIG/subdir.mk
 -include APP/millis/subdir.mk
 -include APP/SmartHome/subdir.mk

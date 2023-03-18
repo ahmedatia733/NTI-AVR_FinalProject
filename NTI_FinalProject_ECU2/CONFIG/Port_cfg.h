@@ -13,7 +13,7 @@
   GLOBAL CONSTANT MACROS
 *******************************************/
 /* please Configure number of pins to configure */
-#define PORT_PINS_CONFIG_ARR_SIZE    26
+#define PORT_PINS_CONFIG_ARR_SIZE    25
 #define SmallOS_PortConfig_ARR_SIZE 20
 #define Configurable_Duty_freq_PortConfig_ARR_SIZE 23
 #define LoginSystem_PortConfig_ARR_SIZE 23

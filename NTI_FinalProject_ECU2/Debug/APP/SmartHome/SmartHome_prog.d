@@ -7,7 +7,8 @@ APP/SmartHome/SmartHome_prog.o APP/SmartHome/SmartHome_prog.o:  \
   F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\ADC/ADC_types.h \
   F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG/ADC_config.h \
   F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\ADC/ADC_types.h \
-  F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG/LDR_config.h
+  F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG/LDR_config.h \
+  C:\WinAVR-20100110\avr\include/string.h
 
 ../APP/SmartHome/SmartHome_init.h:
 
@@ -28,3 +29,5 @@ F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG/ADC_co
 F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\MCAL\ADC/ADC_types.h:
 
 F:\embedded\NTIProjects\NTI-AVR_FinalProject\NTI_FinalProject_ECU2\CONFIG/LDR_config.h:
+
+C:\WinAVR-20100110\avr\include/string.h:
