@@ -19,11 +19,11 @@
 #include "CLCD_int.h"
 
 /*Application Includes*/
-#include "LedIntensity.h"
+#include "SmartHome_init.h"
 
 
 /*WIFI includes*/
-#include "WifiBroker.h"i"
+
 
 
 /* Global Externs */
@@ -41,6 +41,8 @@ M_GIE_void_EnableGlobalInterrupt();
 M_PORT_voidInit(Port_ConfigArr);
 H_CLCD_voidInit();
 
+APP_SmartHome_void_LightIntensity_init();
+
 /*
 //timer
 TIMER0_config_t timer0;
@@ -52,11 +54,11 @@ M_TIMER0_void_StartFastPWM(50, 10);
 APP_void_LedIntensity_LDR_init();
 */
 
-H_LM35_void_Init();
+//H_LM35_void_Init();
 
-u16 res;
-u16 resOVER40;
-M_TIMER0_void_StartFastPWM(100, 100);
+//u16 res;
+//u16 resOVER40;
+//M_TIMER0_void_StartFastPWM(100, 100);
 
 
 while(1){
@@ -73,6 +75,9 @@ while(1){
 
 
 	//LM35 app
+	H_CLCD_voidClearDisplay();
+	H_CLCD_void_Send_u32Num(APP_SmartHome_u8_GetIntensityLevel());
+	_delay_ms(1000);
 
 
 }

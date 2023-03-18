@@ -22,9 +22,7 @@ RM := rm -rf
 -include HAL/CLCD/subdir.mk
 -include CONFIG/subdir.mk
 -include APP/millis/subdir.mk
--include APP/WifiBroker/subdir.mk
--include APP/LedIntensity/subdir.mk
--include APP/FanSpeed/subdir.mk
+-include APP/SmartHome/subdir.mk
 -include APP/subdir.mk
 -include subdir.mk
 -include objects.mk
