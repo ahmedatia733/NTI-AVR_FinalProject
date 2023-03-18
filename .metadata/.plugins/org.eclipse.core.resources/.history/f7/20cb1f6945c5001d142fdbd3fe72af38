@@ -1,0 +1,24 @@
+/*
+ * WifiBroker.c
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#include "WifiBroker.h"
+
+
+u8 APP_void_LedIntensity_GetIntensityFromMobile(u8* msg){
+	   char *token;
+
+	   /* get the first token */
+	   token = strtok(msg, TOKEN_DELIMETER);
+	   /* walk through other tokens */
+	   while( token != 0 ) {
+		   H_CLCD_voidSendString(token);
+	      token = strtok(0, TOKEN_DELIMETER);
+	   }
+	   return(0);
+
+}
+

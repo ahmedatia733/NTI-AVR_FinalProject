@@ -1,0 +1,436 @@
+/*
+ * TIM_prog.c
+ *
+ *  Created on: Feb 25, 2023
+ *      Author: alish
+ */
+#include "TIM_config.h"
+#if TIMER_SWITCH
+
+#include "TIM_interface.h"
+#include "TIM_private.h"
+#include "Mcu_HW.h"
+#include "BIT_MATH.h"
+
+
+void M_TIMER0_void_SetTimerMode(TIMER0_mode_t mode){
+
+	switch (mode)
+		{
+		//TIMER RUNNING in normal mode
+			case TIMER0_NORMAL_MODE:
+				CLR_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+				CLR_BIT(TCCR0_REG , TCCR0_WGM00_BIT);
+				break;
+			//TIMER Running In CTC Mode :
+			// so OC0 (on compare) mode need to be defined -> (toggle, set, clear, or disconnected and running as a normal port).
+			case TIMER0_CTC_MODE:
+				CLR_BIT(TCCR0_REG , TCCR0_WGM00_BIT);
+				SET_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+				break;
+			/*
+				timer running in phase-correct PWM mode: so we need to define
+				if it's inverting(CLEAR on match while down-counting and SET while up-counting)
+				or non-inverting (SET on match while down-counting and CLEAR while up-counting) one.
+				*/
+			case TIMER0_PHASECORRECT_PWM_MODE:
+				SET_BIT(TCCR0_REG ,TCCR0_WGM00_BIT);
+				CLR_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+				break;
+			/*
+			Timer running in fast PWM mode: so, we need to define if it's - inverting: SET on compare match and CLEAR at BOTTOM/TOP,
+			- non-inverting : CLEAR on compare match and SET at BOTTOM/TOP
+			*/
+			case TIMER0_FAST_PWM_MODE:
+				SET_BIT(TCCR0_REG , TCCR0_WGM00_BIT);
+				SET_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+				break;
+
+			default://NORMAL_MODE is my default timer mode
+				CLR_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+				CLR_BIT(TCCR0_REG , TCCR0_WGM00_BIT);
+		}//switch timer mode
+}
+
+void M_TIMER0_void_SetOutputCompareMode(TIMER_output_compare_mode_t oc_mode){
+	switch(oc_mode)
+		{
+				case DISCONNECTED:
+					CLR_BIT(TCCR0_REG , TCCR0_COM00_BIT);
+					CLR_BIT(TCCR0_REG , TCCR0_COM01_BIT);
+					break;
+				case NON_INVERTING_PWM:
+					CLR_BIT(TCCR0_REG , TCCR0_COM00_BIT);
+					SET_BIT(TCCR0_REG, TCCR0_COM01_BIT);
+					break;
+				case INVERTING_PWM:
+					SET_BIT(TCCR0_REG , TCCR0_COM00_BIT);
+					SET_BIT(TCCR0_REG , TCCR0_COM01_BIT);
+					break;
+				case TOGGLE_ON_COMPARE:
+					SET_BIT(TCCR0_REG ,TCCR0_COM00_BIT);
+					CLR_BIT(TCCR0_REG , TCCR0_COM01_BIT);
+					break;
+				case CLEAR_ON_COMPARE:
+					CLR_BIT(TCCR0_REG ,TCCR0_COM00_BIT);
+					SET_BIT(TCCR0_REG , TCCR0_COM01_BIT);
+					break;
+				case SET_ON_COMPARE:
+					SET_BIT(TCCR0_REG ,TCCR0_COM00_BIT);
+					SET_BIT(TCCR0_REG , TCCR0_COM01_BIT);
+					break;
+				default: //Disconnected is my default behavior
+					CLR_BIT(TCCR0_REG ,TCCR0_COM00_BIT);
+					CLR_BIT(TCCR0_REG , TCCR0_COM01_BIT);
+		}//switch compare mode
+
+}
+
+
+//TIMER0
+void M_TIMER0_void_Init(TIMER0_config_t timer){
+
+	M_TIMER0_void_SetTimerMode(timer.timer_mode);
+
+	M_TIMER0_void_SetOutputCompareMode(timer.output_compare_mode);
+
+
+	//Overflow interrupt masking option
+	switch(timer.overflow_int_mask){
+	case TIMER_ENABLE_INTERRUPT:
+		SET_BIT(TIMSK_REG , TIMSK_TOIE0_BIT);
+		break;
+	default:
+	case TIMER_DISABLE_INTERRUPT:
+		CLR_BIT(TIMSK_REG , TIMSK_TOIE0_BIT);
+		break;
+	}
+
+	//On Compare Match interrupt masking option
+	switch(timer.oc_int_mask){
+	case TIMER_ENABLE_INTERRUPT:
+		SET_BIT(TIMSK_REG , TIMSK_OCIE0_BIT);
+		break;
+	default:
+	case TIMER_DISABLE_INTERRUPT:
+		CLR_BIT(TIMSK_REG , TIMSK_OCIE0_BIT);
+		break;
+	}
+
+
+}
+
+
+void M_TIMER0_void_Start(TIMER_clk_select_mode_t prescaler){
+	TCCR0_REG &= 0xf8;                       //clearing first three bits from previous data
+	TCCR0_REG |= prescaler;          	    //updating their values
+}
+
+void M_TIMER0_void_stop(){
+
+	TCCR0_REG &= 0xf8;                       //clearing first three bits from previous data
+
+}
+u32 M_TIMER0_void_NORMAL_GetCounts(){
+	u8 curr_timer_value = TCNT0_REG;
+	//timerResetsCount : is incremented inside the ISR
+	u32 totalCounts = curr_timer_value + (u32)( 256 * timerResetsCount );
+	return totalCounts;
+}
+
+void M_TIMER0_void_StartFastPWM(u32 freq, u8 duty){
+	//Changing the mode of the timer to be FAST PWM
+	SET_BIT(TCCR0_REG , TCCR0_WGM00_BIT);
+	SET_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+
+	CLR_BIT(TCCR0_REG , TCCR0_COM00_BIT);
+	SET_BIT(TCCR0_REG, TCCR0_COM01_BIT);
+
+	//Changing the OCR0 value to fit the duty cycle ( non-inverting )
+	//OCR0_REG = ((u16)(duty*256))/100;
+
+	//Changing the OCR0 value to fit the duty cycle ( inverting )
+	 OCR0_REG = 256-(((u16)(duty*256))/100);
+
+	//Changing the prescaler value to fit the freq
+	u16 prescaler = (MCU_FREQ)/((u32)(freq*256));
+
+	switch(prescaler){
+	case 1 :
+		prescaler = PRESCALER_1;
+		break;
+	case 8 :
+		prescaler = PRESCALER_8;
+		break;
+	case 64 :
+		prescaler = PRESCALER_64;
+		break;
+	case 256 :
+		prescaler = PRESCALER_256;
+		break;
+	case 1024 :
+		prescaler = PRESCALER_1024;
+		break;
+	}
+	if(prescaler > 1 && prescaler < 8){
+		if( (prescaler -1) <= (8-prescaler ) ){
+			prescaler = PRESCALER_1;
+		}else{
+			prescaler = PRESCALER_8;
+		}
+	}else if(prescaler > 8 && prescaler < 64){
+		if( (prescaler - 8) <= (64-prescaler) ){
+			prescaler = PRESCALER_8;
+		}else{
+			prescaler = PRESCALER_64;
+		}
+	}else if(prescaler > 64 && prescaler < 256){
+		if( (prescaler - 64) <= (256-prescaler) ){
+			prescaler = PRESCALER_64;
+		}else{
+			prescaler = PRESCALER_256;
+		}
+	}else if(prescaler > 256 && prescaler < 1024){
+		if( (prescaler - 256) <= (1024-prescaler) ){
+			prescaler = PRESCALER_256;
+		}else{
+			prescaler = PRESCALER_1024;
+		}
+	}
+
+	M_TIMER0_void_Start(prescaler);
+
+}
+
+void M_TIMER0_void_StartPhaseCorrectPWM(u32 freq ,u8 duty){
+	//Changing the mode of the timer to be PHASE CORRECT PWM
+	SET_BIT(TCCR0_REG ,TCCR0_WGM00_BIT);
+	CLR_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+
+	//Make Sure that it's in the Inverting Mode (Set in up-counting / Clear in down-counting)
+	SET_BIT(TCCR0_REG , TCCR0_COM00_BIT);
+	SET_BIT(TCCR0_REG, TCCR0_COM01_BIT);
+
+	//Changing the OCR0 value to fit the duty cycle ( inverting )
+	//OCR0_REG = ((u16)duty*510)/(2*100);
+	OCR0_REG = (((u16)100-duty)*510)/(2*100);
+
+
+	u16 prescaler = (MCU_FREQ)/((u32)freq*510);
+	M_TIMER0_void_Start(prescaler);
+}
+
+#define FACTOR 100000    // To Avoid working with fractions as (Atmega32) doesn't have FPU
+u32 M_TIMER0_void_SetDelayTimeMilliSec_NORMAL(u32 millisec, void (*FuncPTR)()){
+
+	//1024
+	u64 total_overflows;    //the variable is to be returned
+	u64 remainder_ticks;    //the value that TCNT0 will be initialized with
+	//64 micro Seconds : is used to calculate {total_overflows} & {remainder_ticks}
+	u64 tick_time_micro = (u32)(1024*1000000) / MCU_FREQ ;
+
+
+
+	u64 total_ticks = (millisec*1000) / tick_time_micro ;  //(millisec * 1000)-> as we're working with micro seconds
+	if(total_ticks < 256){
+		//Initializing my TCNT0 with the remainder ticks  - no overflows needed -
+		TCNT0_REG = 256 - total_ticks;
+	}
+	else{
+	//This hustle is to avoid working with fractions in the data
+	total_overflows = ((u64)total_ticks * FACTOR) / 256;
+	remainder_ticks = (u64)total_overflows % FACTOR;
+	remainder_ticks = (u64)remainder_ticks * 256;
+	remainder_ticks = (u64)remainder_ticks / FACTOR;
+	total_overflows = (u64)total_overflows / FACTOR;
+
+	//Initializing my TCNT0 with the remainder ticks
+	TCNT0_REG = 256 - remainder_ticks;
+	//increasing the overflows count by 1 - taking in counts the 1st ovf caused by the remainder ticks
+	total_overflows++;
+
+	}
+
+	//Overflow ISR - Callback function : as it's necessary
+	M_TIMER_void_CallBack(TIMER0_OVERFLOW, FuncPTR);
+
+	//Making sure that the timer0 overflow interrupt is ENABLED : As it's neccessary
+	M_TIMER_void_EnableINT(TIMER0_OVERFLOW);
+
+	//Making Sure we are in the timer (NORMAL) mode
+	CLR_BIT(TCCR0_REG , TCCR0_WGM01_BIT);
+	CLR_BIT(TCCR0_REG , TCCR0_WGM00_BIT);
+
+	//It's fixed prescaler to calculate (1) millie second
+	M_TIMER0_void_Start(PRESCALER_1024);
+
+	return total_overflows;
+
+
+}
+
+/* *********************************************
+ *                    ICU                      *
+ * ******************************************* */
+//_________________________________TIMER1______________________________________________
+void M_TIMER1_void_ICU_init_Interrupt_OP(u8 prescaler, TIMER1_ICU_trigger_edge_t edge){
+	//enable ICU interrupt to ensure we read ICU -> ICR1L and ICR1H as early as possible
+	M_TIMER_void_EnableINT(TIMER1_CAPT);
+
+	//enable timer1 ovf interrupt in order to be able to catch overflows
+	M_TIMER_void_EnableINT(TIMER1_OVERFLOW);
+
+	//select the initial triggering edge
+	M_TIMER1_void_ICU_trigger_edge(edge);
+
+	//starting the timer
+	M_TIMER1_void_Start(prescaler);
+
+}
+void M_TIMER1_void_Start(u8 prescaler){
+
+	TCCR1B_REG &= 0xD8;                       //clearing first three bits from previous data
+	TCCR1B_REG |= prescaler;          	    //updating their values
+
+}
+void M_TIMER1_void_Stop(){
+	TCCR1B_REG &= 0xD8;                       //clearing first three bits from previous data
+}
+void M_TIMER1_void_ICU_trigger_edge(TIMER1_ICU_trigger_edge_t edge){
+	switch(edge){
+	case TIMER1_ICU_FALLING:
+		CLR_BIT(TCCR1B_REG, TCCR1B_ICES1_BIT);
+		break;
+	case TIMER1_ICU_RISING:
+		SET_BIT(TCCR1B_REG, TCCR1B_ICES1_BIT);
+		break;
+	}
+}
+
+u16 M_TIMER1_void_ICU_takeReading(){
+
+	return ICR1_REG;
+
+}
+
+
+//APPLIES for TIMER0, TIMER1, and TIMER2
+void M_TIMER_void_CallBack(TIMER_INT_SOURCE_t int_src, void (*localFuncPTR)(void)){
+
+	switch(int_src){
+	case TIMER0_OVERFLOW:
+		TIMER0_OVERFLOW_PTR = localFuncPTR;
+		break;
+	case TIMER0_ON_COMP:
+		TIMER0_ON_COMP_PTR = localFuncPTR;
+		break;
+	case TIMER1_CAPT:
+		TIMER1_CAPT_PTR = localFuncPTR;
+		break;
+	case TIMER1_OVERFLOW:
+		TIMER1_OVERFLOW_PTR = localFuncPTR;
+		break;
+	}
+
+}
+
+
+void M_TIMER_void_EnableINT(TIMER_INT_SOURCE_t int_src){
+	switch(int_src){
+	case TIMER0_OVERFLOW:
+		SET_BIT(TIMSK_REG,TIMSK_TOIE0_BIT);
+		break;
+	case TIMER0_ON_COMP:
+		SET_BIT(TIMSK_REG,TIMSK_OCIE0_BIT);
+		break;
+	case TIMER1_OVERFLOW:
+		SET_BIT(TIMSK_REG,TIMSK_TOIE1_BIT);
+		break;
+	case TIMER1_ON_COMP_A:
+		SET_BIT(TIMSK_REG,TIMSK_OCIE1A_BIT);
+		break;
+	case TIMER1_ON_COMP_B:
+		SET_BIT(TIMSK_REG,TIMSK_OCIE1B_BIT);
+		break;
+	case TIMER1_CAPT:
+		SET_BIT(TIMSK_REG,TIMSK_TICIE1_BIT);
+		break;
+	case TIMER2_OVERFLOW:
+		SET_BIT(TIMSK_REG,TIMSK_TOIE2_BIT);
+		break;
+	case TIMER2_ON_COMP:
+		SET_BIT(TIMSK_REG,TIMSK_OCIE2_BIT);
+		break;
+	}
+}
+
+void M_TIMER_void_DisableINT(TIMER_INT_SOURCE_t int_src){
+
+	switch(int_src){
+		case TIMER0_OVERFLOW:
+			CLR_BIT(TIMSK_REG,TIMSK_TOIE0_BIT);
+			break;
+		case TIMER0_ON_COMP:
+			CLR_BIT(TIMSK_REG,TIMSK_OCIE0_BIT);
+			break;
+		case TIMER1_OVERFLOW:
+			CLR_BIT(TIMSK_REG,TIMSK_TOIE1_BIT);
+			break;
+		case TIMER1_ON_COMP_A:
+			CLR_BIT(TIMSK_REG,TIMSK_OCIE1A_BIT);
+			break;
+		case TIMER1_ON_COMP_B:
+			CLR_BIT(TIMSK_REG,TIMSK_OCIE1B_BIT);
+			break;
+		case TIMER1_CAPT:
+			CLR_BIT(TIMSK_REG,TIMSK_TICIE1_BIT);
+			break;
+		case TIMER2_OVERFLOW:
+			CLR_BIT(TIMSK_REG,TIMSK_TOIE2_BIT);
+			break;
+		case TIMER2_ON_COMP:
+			CLR_BIT(TIMSK_REG,TIMSK_OCIE2_BIT);
+			break;
+		}
+}
+
+
+
+
+
+/* _________________________ISR____________________________ */
+
+
+ISR(TIMER0_OVF_vect){
+
+	if(TIMER0_OVERFLOW_PTR != NULL){
+		TIMER0_OVERFLOW_PTR();
+	}
+
+}
+
+
+ISR(TIMER0_COMP_vect){
+
+	if(TIMER0_ON_COMP_PTR != NULL){
+		TIMER0_ON_COMP_PTR();
+	}
+
+}
+
+ISR(TIMER1_CAPT_vect){
+	if(TIMER1_CAPT_PTR != NULL){
+		TIMER1_CAPT_PTR();
+	}
+
+}
+
+ISR(TIMER1_OVF_vect){
+
+	if(TIMER1_OVERFLOW_PTR != NULL){
+		TIMER1_OVERFLOW_PTR();
+	}
+
+}
+
+#endif

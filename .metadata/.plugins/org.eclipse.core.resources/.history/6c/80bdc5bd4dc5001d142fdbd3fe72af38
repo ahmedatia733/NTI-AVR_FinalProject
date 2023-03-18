@@ -1,0 +1,40 @@
+/*
+ * WifiBroker.c
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#include <string.h>
+#include "WifiBroker.h"
+
+/*Globals*/
+APP_Device_t DEVICES_STATE_LIST[DEVICES_COUNT] = {
+		{APP_LED,	APP_AUTO,	50},
+		{APP_FAN,	APP_AUTO,	50},
+};
+
+APP_Device_t APP_en_GetCommand(u8* msgArray){
+
+
+	char *token;
+	char *command;
+	/* get the first token */
+	token = strtok(msgArray, ",");
+
+
+	/* walk through other tokens */
+		if(strcmp(token,COMMAND_HEADER) == 0){
+			//it's Correct Header
+			//Get next token
+			token = strtok(0, ",");
+			if(strcmp(token,))
+
+		}
+
+
+
+
+
+}
+

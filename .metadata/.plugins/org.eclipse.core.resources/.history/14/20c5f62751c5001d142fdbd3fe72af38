@@ -1,0 +1,72 @@
+/*
+ * WifiBroker.c
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#include <string.h>
+#include "WifiBroker.h"
+
+/*Globals*/
+u8** DEVICE_NAME [DEVICES_COUNT] = { APP_LED, APP_FAN};
+u8** DEVICE_MODE [DEVICES_MODES_COUNT] = { APP_MANUAL, APP_AUTO };
+
+APP_Device_t DEVICES_STATE_LIST[DEVICES_COUNT] = {
+		{APP_LED,	APP_AUTO,	50},
+		{APP_FAN,	APP_AUTO,	50},
+};
+
+APP_Device_t APP_en_GetCommand(u8* msgArray){
+
+
+	char *token;
+	APP_Device_t command;
+	/* get the first token */
+	token = strtok(msgArray, TOKEN_DELIMETER);
+
+
+	/* walk through other tokens */
+		if(strcmp(token,COMMAND_HEADER) == 0){
+			//it's Correct Header
+			//Get next token [Device Name]
+			token = strtok(0, TOKEN_DELIMETER);
+
+			if(token != 0){
+				//check if any device name exists
+				for(int loopVar = 0; loopVar < DEVICES_COUNT; loopVar++){
+					if(strcmp(token,DEVICE_NAME[loopVar]) == 0){
+						//there's correct Device Name
+						command.device = token;
+						break;
+					}
+				}
+			}else{
+				//NO TOKEN IS AVAILABLE
+			}
+
+			//Get next token [Device Mode]
+			token = strtok(0, TOKEN_DELIMETER);
+			if(token != 0){
+				//check if any Modes exists
+				for(int loopVar = 0; loopVar < DEVICES_MODES_COUNT; loopVar++){
+					if(strcmp(token,DEVICE_MODE[loopVar]) == 0){
+						//there's correct Mode
+						command.device_mode = token;
+						break;
+					}
+				}
+			}else{
+				//NO TOKEN IS AVAILABLE
+			}
+			//Get next token [value]
+			token = strtok(0, TOKEN_DELIMETER);
+
+		}
+
+
+
+
+
+}
+

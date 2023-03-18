@@ -1,0 +1,25 @@
+/*
+ * WifiBroker.h
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#ifndef WIFIBROKER_WIFIBROKER_H_
+#define WIFIBROKER_WIFIBROKER_H_
+
+
+
+#include "STD_TYPES.h"
+#include "APP_types.h"
+
+#define TOKEN_DELIMETER		","
+
+
+
+
+APP_Device_t APP_en_LedIntensity_GetCommand(u8* msgArray);
+
+
+
+#endif /* WIFIBROKER_WIFIBROKER_H_ */

@@ -1,0 +1,39 @@
+/*
+ * APP_type.h
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#ifndef APP_TYPES_H_
+#define APP_TYPES_H_
+
+#include "STD_TYPES.h"
+
+/*Enums*/
+typedef enum{
+
+	APP_LED = 0,
+	APP_FAN,
+
+}APP_ApplianceName_t;
+
+typedef enum{
+
+	APP_MANUAL_APPLIANCE = 0,
+	APP_AUTO_APPLIANCE
+
+}APP_ApplianceMode_t;
+
+
+/*Structs*/
+typedef struct{
+
+	APP_ApplianceName_t device;
+	APP_ApplianceMode_t device_mode;
+	u8 value;
+
+}APP_Appliance;
+
+
+#endif /* APP_TYPES_H_ */

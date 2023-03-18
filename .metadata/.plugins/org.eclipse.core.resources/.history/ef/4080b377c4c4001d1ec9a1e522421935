@@ -1,0 +1,26 @@
+/*
+ * ADC_config.h
+ *
+ *  Created on: Mar 16, 2023
+ *      Author: alish
+ */
+
+#ifndef ADC_CONFIG_H_
+#define ADC_CONFIG_H_
+
+#define ADC_SWITCH	1
+
+#include "ADC_types.h"
+
+typedef struct{
+
+	ADC_voltage_ref_t volt_ref;
+	ADC_auto_trigger_t auto_trigger;
+	ADC_interrupt_t interrupt;
+	ADC_prescaler_t prescaler;
+	ADC_auto_trigger_source_t auto_trigger_source;
+
+}ADC_config_t;
+
+
+#endif /* ADC_CONFIG_H_ */

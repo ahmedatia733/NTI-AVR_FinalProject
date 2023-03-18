@@ -1,0 +1,32 @@
+/*
+ * LedIntensity.h
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+
+#ifndef LEDINTENSITY_LEDINTENSITY_H_
+#define LEDINTENSITY_LEDINTENSITY_H_
+
+#include "LDR_interface.h"
+
+/*Configuration MACROS*/
+#define LDR_ADC_CHANNEL	0
+
+
+/*Types*/
+typedef enum{
+	LedIntensity_LEVEL1 = 1,
+	LedIntensity_LEVEL2,
+	LedIntensity_LEVEL3,
+	LedIntensity_LEVEL4,
+}LedIntensity_Level_t;
+
+
+/*Functions Prototypes*/
+void APP_void_LedIntensity_LDR_init();
+u16 APP_void_LedInstensity_VoltageResult();
+LedIntensity_Level_t APP_void_LedIntensity_GetLevel();
+
+
+#endif /* LEDINTENSITY_LEDINTENSITY_H_ */

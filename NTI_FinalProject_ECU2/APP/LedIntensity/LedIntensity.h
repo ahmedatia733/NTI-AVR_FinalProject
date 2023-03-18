@@ -1,0 +1,31 @@
+/*
+ * LedIntensity.h
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+
+#ifndef LEDINTENSITY_LEDINTENSITY_H_
+#define LEDINTENSITY_LEDINTENSITY_H_
+
+#include "LDR_interface.h"
+
+/*Configuration MACROS*/
+#define LDR_ADC_CHANNEL	0
+
+#define LDR_MAX_READING (u32)4900
+#define LDR_MIN_READING	(u32)0
+#define LED_MAX_INTENSITY (u32)0
+#define LED_MIN_INTENSITY (u32)100
+
+
+
+
+/*Functions Prototypes*/
+void APP_void_LedIntensity_LDR_init();
+u16 APP_void_LedInstensity_VoltageResult();
+u8 APP_void_LedIntensity_GetIntensityFromLDR();
+
+
+
+#endif /* LEDINTENSITY_LEDINTENSITY_H_ */

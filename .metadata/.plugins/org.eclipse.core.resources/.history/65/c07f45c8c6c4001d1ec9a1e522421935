@@ -1,0 +1,92 @@
+/*
+ * LM35_prog.c
+ *
+ *  Created on: Mar 16, 2023
+ *      Author: alish
+ */
+#include "LM35_interface.h"
+#define F_CPU 16000000UL
+#include <util/delay.h>
+
+#include "CLCD_int.h"
+
+extern ADC_config_t LDR_ADC_conf
+
+#define LM35_NUM_OF_SAMPLES	40
+
+void H_LM35_void_Init(ADC_config_t adc_config){
+	M_ADC_void_Init(adc_config);
+}
+
+u16 H_LM35_u16_ReadTemprature(ADC_channel_t channel){
+
+/*
+ * //Negative values handling
+	analog_volt = ADC_result * (5.0/1024);
+	if (ADC_result < 307){
+		analog_volt = analog_volt - (f64)0.55 ;
+
+		analog_result = (analog_volt*(f64)1000.0) / 10.0;
+		analog_result = 55 - analog_result ;
+
+	}else if(ADC_result > 308 ){
+		analog_result = (analog_volt*1000.0) / 10.0;
+
+	}else{
+		analog_result = 0.0;
+	}
+*/
+
+	f64 analog_volt;
+	f64 tempreture;
+	u16 ADC_result;
+	u8 state= ADC_FAILED;
+	u8 readings[LM35_NUM_OF_SAMPLES];
+	int i, j;
+
+	//Taking samples
+	for(i= 0; i< LM35_NUM_OF_SAMPLES ; i++){
+		M_ADC_void_StartConversion();
+
+		while(state == ADC_FAILED){
+			state = M_ADC_void_GetDigitalValueSynchNonBlocking(channel, &ADC_result);
+		}
+		readings[i] = ADC_result;
+		_delay_us(100);
+
+	}
+
+	//Sorting readings (Bubble Sort)
+		u8 temp;
+	    for (i = 0; i < LM35_NUM_OF_SAMPLES; i++) {
+	        for (j = 0; j < LM35_NUM_OF_SAMPLES-j-1; j++) {
+	            if (readings[j] > readings[j+1]) {
+	                temp = readings[j];
+	                readings[j] = readings[j+1];
+	                readings[j+1] = temp;
+	            }
+	        }
+	    }
+
+	    // Find the median value in the window
+	    if (LM35_NUM_OF_SAMPLES % 2 == 0) {
+	        ADC_result = (readings[LM35_NUM_OF_SAMPLES/2] + readings[LM35_NUM_OF_SAMPLES/2-1])/2;
+	    }
+	    else {
+	        ADC_result = readings[LM35_NUM_OF_SAMPLES/2];
+	    }
+
+
+		analog_volt = ADC_result * ((5.0*1000)/1024);  //in millieVolts
+
+		if(analog_volt == (f64)550){
+			tempreture = 0.0;
+
+		}else {
+			tempreture = analog_volt / 10.0;
+		}
+
+		//return ADC_result;
+		return tempreture;
+
+}

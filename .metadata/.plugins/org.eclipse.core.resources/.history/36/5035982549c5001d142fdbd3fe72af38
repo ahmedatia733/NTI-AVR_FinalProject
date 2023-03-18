@@ -1,0 +1,35 @@
+/*
+ * WifiBroker.c
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#include "WifiBroker.h"
+
+
+u8 APP_void_LedIntensity_UpdateFromWifi(u8* msgArray){
+
+
+	char *token;
+	char *command;
+	/* get the first token */
+	token = strtok(msgArray, ",");
+
+	H_CLCD_voidSendString(token);
+	H_CLCD_voidGotoXY(1, 0);
+
+	/* walk through other tokens */
+	while( token != 0 ) {
+
+		command =
+		   H_CLCD_voidSendString(token);
+		   H_CLCD_voidSendString("|");
+
+	   token = strtok(0, ",");
+	}
+
+
+
+}
+

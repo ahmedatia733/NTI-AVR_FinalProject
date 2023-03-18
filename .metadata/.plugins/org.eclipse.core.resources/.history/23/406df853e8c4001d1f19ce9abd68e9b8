@@ -1,0 +1,55 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+
+
+#include "Port_int.h"
+#include "Dio_int.h"
+#include "TIM_interface.h"
+#include "LDR_interface.h"
+#include "ADC_interface.h"
+#include "GIE_interface.h"
+
+/*Application Includes*/
+#include "LedIntensity.h"
+
+
+/* Global Externs */
+extern const Port_Configtype Port_ConfigArr[PORT_PINS_CONFIG_ARR_SIZE];
+
+int main(){
+
+
+	/* Module Initialization */
+
+M_GIE_void_EnableGlobalInterrupt();
+M_PORT_voidInit(Port_ConfigArr);
+
+/*
+//timer
+TIMER0_config_t timer0;
+*/
+
+
+/*
+M_TIMER0_void_StartFastPWM(50, 10);
+APP_void_LedIntensity_LDR_init();
+*/
+
+H_LDR_void_Init();
+H_LDR_u16_Read(ADC_0);
+
+while(1){
+
+
+
+
+}
+
+
+
+return 0;
+}

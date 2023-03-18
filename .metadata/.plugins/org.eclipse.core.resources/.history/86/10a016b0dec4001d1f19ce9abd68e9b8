@@ -1,0 +1,23 @@
+/*
+ * LedIntensity.c
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+
+#include "LedIntensity.h"
+
+void APP_void_LedIntensity_LDR_init(){
+
+	H_LDR_void_Init();
+
+}
+
+
+u16 APP_void_LedInstensity_GetIntensity(){
+
+	u16 result ;
+	result = H_LDR_u16_Read(LDR_ADC_CHANNEL);
+	return result;
+}
+

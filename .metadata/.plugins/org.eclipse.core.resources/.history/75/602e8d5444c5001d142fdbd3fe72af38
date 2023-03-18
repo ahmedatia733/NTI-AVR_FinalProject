@@ -1,0 +1,22 @@
+/*
+ * WifiBroker.h
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+
+#ifndef SENSORWIFIBROKER_WIFIBROKER_H_
+#define SENSORWIFIBROKER_WIFIBROKER_H_
+
+#include <string.h>
+#include "STD_TYPES.h"
+
+#define TOKEN_DELIMETER		','
+
+
+
+
+u8 APP_void_LedIntensity_GetIntensityFromMobile(u8* msg);
+
+
+#endif /* SENSORWIFIBROKER_WIFIBROKER_H_ */

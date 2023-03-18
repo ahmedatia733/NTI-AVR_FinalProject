@@ -1,0 +1,37 @@
+/*
+ * WifiBroker.c
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#include <string.h>
+#include "WifiBroker.h"
+
+/*Globals*/
+APP_Device_t DEVICES_STATE_LIST[DEVICES_COUNT] = {
+		{APP_LED,	APP_AUTO,	50},
+		{APP_FAN,	APP_AUTO,	50},
+};
+
+void APP_void_LedIntensity_UpdateFromWifi(u8* msgArray){
+
+
+	char *token;
+	char *command;
+	/* get the first token */
+	token = strtok(msgArray, ",");
+
+
+	/* walk through other tokens */
+	while( token != 0 ) {
+
+		if()
+
+	   token = strtok(0, ",");
+	}
+
+
+
+}
+

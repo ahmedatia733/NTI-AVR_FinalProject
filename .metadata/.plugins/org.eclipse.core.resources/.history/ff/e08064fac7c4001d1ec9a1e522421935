@@ -1,0 +1,17 @@
+/*
+ * LedIntensity.h
+ *
+ *  Created on: Mar 17, 2023
+ *      Author: alish
+ */
+
+#ifndef LEDINTENSITY_LEDINTENSITY_H_
+#define LEDINTENSITY_LEDINTENSITY_H_
+
+#include "LDR_interface.h"
+
+void APP_void_LedIntensity_LDR_init();
+
+
+
+#endif /* LEDINTENSITY_LEDINTENSITY_H_ */

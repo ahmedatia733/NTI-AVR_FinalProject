@@ -1,0 +1,115 @@
+/*
+ * UART_prog.c
+ *
+ *  Created on: ??�/??�/????
+ *      Author: ahmed
+ */
+
+#include "Avr/delay.h"
+#include "UART_init.h"
+char Rx_Buffer_UART[UART_BUFFER_SIZE + 1];
+u8 RX_Wr_Index_UART = 0;
+u8 RX_Rd_Index_UART = 0;
+
+u8 RX_Counter_UART = 0; //a total count of characters in the buffer
+u8 RX_Buffer_Overflow_UART; // This flag is set on USART Receiver
+// buffer overflow
+
+u8 M_UART_void_UARTAvalepale() {
+	return RX_Counter_UART;
+}
+
+void M_UART_void_UARTInit(S_UART_config_t UART_config) {
+
+	UCSRC_REG = 0b10000000;
+	UCSRB_REG = 0b00000000;
+
+	UCSRC_REG |= UART_config.UART_wordLength;   // set word length
+
+	UCSRC_REG |= UART_config.UART_stopBits;		//  set stop bits
+
+	if (UART_config.UART_Parity == UART_Parity_even) {
+
+		SET_BIT(UCSRC_REG, UCSRC_UPM1);
+
+	} else if (UART_config.UART_Parity == UART_Parity_odd) {
+		SET_BIT(UCSRC_REG, UCSRC_UPM0);
+		SET_BIT(UCSRC_REG, UCSRC_UPM1);
+	}
+
+	UBRRL_REG = UART_config.UART_BaudRate; //set baudRate
+
+	SET_BIT(UCSRB_REG, UCSRB_TXEN); // enable UART TX
+	SET_BIT(UCSRB_REG, UCSRB_RXEN); // enable UART RX
+	SET_BIT(UCSRB_REG, UCSRB_RXCIE);
+
+
+}
+
+ISR(USART_RXC_vect) {
+
+	u8 rx_byte;
+
+	rx_byte = UDR_REG;
+	Rx_Buffer_UART[RX_Wr_Index_UART] = rx_byte;  //s put received char in buffer
+	if (++RX_Wr_Index_UART > UART_BUFFER_SIZE)
+		RX_Wr_Index_UART = 0;
+	if (++RX_Counter_UART > UART_BUFFER_SIZE) // keep a character count
+	{
+		RX_Counter_UART = UART_BUFFER_SIZE;  //;  if too many chars came
+
+	}
+
+}
+
+char M_UART_u8_receiveByteASynchNonBlocking(void) {
+
+	char ch = Rx_Buffer_UART[RX_Rd_Index_UART];
+	if (RX_Counter_UART) {
+		RX_Counter_UART--;
+	}
+
+	if (++RX_Rd_Index_UART > UART_BUFFER_SIZE)
+		RX_Rd_Index_UART = 0;
+	return ch;
+}
+
+void M_UART_void_UARTSendByte(u8 Byte) {
+	while (GET_BIT(UCSRA_REG , UCSRB_UDRE) == 0)
+		;
+	UDR_REG = Byte;
+}
+void M_UART_void_UARTSendString(char *strPtr) {
+
+	while (*strPtr) {
+		M_UART_void_UARTSendByte(*strPtr);
+		strPtr++;
+	}
+}
+
+void M_UART_void_UARTSendBytes(u8* byteArr , u8 Arrlength)
+{
+	for(int i = 0 ; i < Arrlength ; i++ )
+	{
+		M_UART_void_UARTSendByte(byteArr[i]);
+	}
+}
+
+void M_UART_void_ReceiveString(char *strPtr) {
+	init_millis(16000000);
+	int counter = 0;
+	long int time = millis();
+	while (1) {
+		if ((time + 2000) < millis())
+			break;
+		while (RX_Counter_UART) {
+			*(strPtr + counter) = M_UART_u8_receiveByteASynchNonBlocking();
+			if (*(strPtr + counter))
+				counter++;
+		}
+	}
+
+	*(strPtr + counter) = 0;
+
+}
+

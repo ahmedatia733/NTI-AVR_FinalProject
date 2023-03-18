@@ -1,0 +1,55 @@
+/*
+ * APP_type.h
+ *
+ *  Created on: Mar 18, 2023
+ *      Author: alish
+ */
+
+#ifndef APP_TYPES_H_
+#define APP_TYPES_H_
+
+#include "STD_TYPES.h"
+
+/*Defines*/
+
+/*FOR COMMAND TRANSLATION*/
+#define TOKEN_DELIMETER		","
+
+//Command Header
+#define COMMAND_HEADER "HEAD"
+//Device Name
+#define DEVICES_COUNT	2
+	#define	APP_LED	"LED"
+	#define	APP_FAN	"FAN"
+//Device Mode
+#define DEVICES_MODES_COUNT	2
+	#define	APP_MANUAL	"M"
+	#define	APP_AUTO	"A"
+
+
+/*Enums*/
+typedef enum{
+	BAD_HEADER = 0,
+	NON_EXISTING_HEADER,
+	BAD_DEVICE_NAME,
+	NON_EXISTING_DEVICE_NAME,
+	BAD_MODE,
+	NON_EXISTING_MODE,
+	BAD_VALUE,
+	NON_EXISTING_VALUE,
+
+
+}APP_COMMAND_ERROR_t;
+
+
+/*Structs*/
+typedef struct{
+
+	u8 device_name[4];
+	u8 device_mode[2];
+	u8 value;
+
+}APP_Device_t;
+
+
+#endif /* APP_TYPES_H_ */
