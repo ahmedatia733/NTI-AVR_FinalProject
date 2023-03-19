@@ -1,0 +1,35 @@
+/*
+ * SmartHome_prog.c
+ *
+ *  Created on: ١٨‏/٠٣‏/٢٠٢٣
+ *      Author: ahmed
+ */
+
+#include "SmartHome_init.h"
+
+/*Globals*/
+u8* devices_names [DEVICES_COUNT] = { APP_LED, APP_FAN};
+u8* devices_modes [DEVICES_MODES_COUNT] = { APP_MANUAL, APP_AUTO };
+u8* devices_states [DEVICES_STATES_COUNT] = { APP_STATE_ON, APP_STATE_OFF };
+u8* devices_commands [DEVICES_COMMANDS_COUNT] = { APP_AV_COMMAND, APP_DV_COMMAND, APP_M_COMMAND};
+
+extern APP_Device_t DEVICES_STATE_LIST[DEVICES_COUNT];
+extern S_WIFI_Config_t WIFI_Config;
+
+
+void APP_void_StartWIFIserver(void)
+{
+	H_WIFI_void_WIFIInit( WIFI_Config );
+	H_WIFI_void_StartTCPServer();
+}
+
+
+APP_WIFI_UpdateStatus_t APP_UpdateStatus_t_WIFIUpdate(char *recevBuffer)
+{
+if(H_WIFI_ReceiveStatue_t_WIFIreceive(recevBuffer) == WIFI_Data_Receved)
+{
+	return APP_WIFI_Updated;
+}
+return APP_WIFI_NO_Update;
+
+}

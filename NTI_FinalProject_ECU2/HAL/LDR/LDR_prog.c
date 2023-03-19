@@ -27,7 +27,7 @@ void H_LDR_void_Init(){
  * - The function does a 1-shoot ADC conversion and return the voltage in millieVolts
  * - The function uses the non-blocking ADC reading function, but H_LDR_u16_Read itself
  *   blocks the code because it loops until the Reading function returns ADC_SUCCEED  ***/
-u16 H_LDR_u16_Read(ADC_channel_t channel){
+u16 H_LDR_u16_Read(){
 
 	f64 analog_volt;
 	u16 ADC_result;
@@ -40,7 +40,7 @@ u16 H_LDR_u16_Read(ADC_channel_t channel){
 
 		M_ADC_void_StartConversion();
 		while(state == ADC_FAILED){
-			state = M_ADC_void_GetDigitalValueSynchNonBlocking(channel, &ADC_result);
+			state = M_ADC_void_GetDigitalValueSynchNonBlocking(LDR_ADC_CHANNEL, &ADC_result);
 		}
 		readings[i] = ADC_result;
 		_delay_us(100);

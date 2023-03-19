@@ -8,6 +8,10 @@
 #ifndef APPCFG_SMARTHOME_CFG_H_
 #define APPCFG_SMARTHOME_CFG_H_
 
+#include "SmartHome_types.h"
 
+
+/* Appliances Pinout */
+#define SMARTHOME_LED	APP_PA6
 
 #endif /* APPCFG_SMARTHOME_CFG_H_ */

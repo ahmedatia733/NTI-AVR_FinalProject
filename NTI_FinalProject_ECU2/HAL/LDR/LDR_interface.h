@@ -10,6 +10,7 @@
 
 #include "STD_TYPES.h"
 #include "ADC_interface.h"
+#include "LDR_config.h"
 
 /*** HOW to use
  * - You provide ADC_config_t structure with the desired ADC configurations
@@ -24,6 +25,6 @@ void H_LDR_void_Init();
  * - The function does a 1-shoot ADC conversion and return the voltage
  * - The function uses the non-blocking ADC reading function, but H_LDR_u16_Read itself
  *   blocks the code because it loops until the Reading function returns ADC_SUCCEED  ***/
-u16 H_LDR_u16_Read(ADC_channel_t channel);
+u16 H_LDR_u16_Read();
 
 #endif /* LDR_LDR_INTERFACE_H_ */

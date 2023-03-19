@@ -1,0 +1,48 @@
+/*
+ * SmartHome_init.h
+ *
+ *  Created on: ١٨‏/٠٣‏/٢٠٢٣
+ *      Author: ahmed
+ */
+
+#ifndef SMARTHOME_SMARTHOME_INIT_H_
+#define SMARTHOME_SMARTHOME_INIT_H_
+
+#include "STD_TYPES.h"
+//#include "LDR_interface.h"
+//#include "LDR_config.h"
+#include "string.h"
+#include "WIFI_init.h"
+
+#include "SmartHome_priv.h"
+#include "SmartHome_types.h"
+
+
+/*Functions Prototypes*/
+
+/*Sensors HUB*/
+void APP_SmartHome_void_UpdateSensorsHub();
+
+ /*Light Intensity functions prototypes*/
+void APP_SmartHome_void_LightIntensity_init();
+u8  APP_SmartHome_u8_GetIntensityLevel();
+
+/*Fan Speed & Temperature functions prototypes*/
+void APP_SmartHome_void_TemperatureSensor_init();
+u8 APP_SmartHome_u8_GetTemperature();
+u8 APP_SmartHome_u8_GetFanSpeed(); //gets fan speed out of temperature
+
+
+
+
+
+/*Appliances functions prototypes*/
+APP_COMMAND_ERROR_t APP_SmartHome_ERROR_t_LocalUpdate(APP_Command_t command);
+
+
+/*TCP functions prototypes*/
+void APP_void_StartWIFIserver(void);
+APP_WIFI_UpdateStatus_t APP_UpdateStatus_t_WIFIUpdate(char *recevBuffer);
+APP_COMMAND_ERROR_t APP_SmartHome_ERROR_t_GetCommand(u8* msgArray, APP_Command_t* command);
+
+#endif /* SMARTHOME_SMARTHOME_INIT_H_ */

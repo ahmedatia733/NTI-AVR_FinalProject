@@ -12,6 +12,7 @@
 
 #include "LM35_interface.h"
 
+#define LM35_ADC_CHANNEL	1
 
 
 

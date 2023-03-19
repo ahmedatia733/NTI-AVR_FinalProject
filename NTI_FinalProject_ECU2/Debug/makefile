@@ -16,6 +16,7 @@ RM := rm -rf
 -include MCAL/ADC/subdir.mk
 -include HAL/WIFI/subdir.mk
 -include HAL/LM35/subdir.mk
+-include HAL/LED/subdir.mk
 -include HAL/LDR/subdir.mk
 -include HAL/LCD/subdir.mk
 -include HAL/DC_MOTOR/subdir.mk
@@ -44,6 +45,17 @@ endif
 
 -include ../makefile.defs
 
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := NTI_FinalProject_ECU2
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX :=
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
+
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
 NTI_FinalProject_ECU2.lss \
@@ -56,29 +68,32 @@ sizedummy \
 
 
 # All Target
-all: NTI_FinalProject_ECU2.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: NTI_FinalProject_ECU2.elf secondary-outputs
 
 # Tool invocations
-NTI_FinalProject_ECU2.elf: $(OBJS) $(USER_OBJS)
+NTI_FinalProject_ECU2.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
 	avr-gcc -Wl,-Map,NTI_FinalProject_ECU2.map -mmcu=atmega32 -o "NTI_FinalProject_ECU2.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-NTI_FinalProject_ECU2.lss: NTI_FinalProject_ECU2.elf
+NTI_FinalProject_ECU2.lss: NTI_FinalProject_ECU2.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: AVR Create Extended Listing'
 	-avr-objdump -h -S NTI_FinalProject_ECU2.elf  >"NTI_FinalProject_ECU2.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-NTI_FinalProject_ECU2.hex: NTI_FinalProject_ECU2.elf
+NTI_FinalProject_ECU2.hex: NTI_FinalProject_ECU2.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Create Flash image (ihex format)'
 	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex NTI_FinalProject_ECU2.elf  "NTI_FinalProject_ECU2.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: NTI_FinalProject_ECU2.elf
+sizedummy: NTI_FinalProject_ECU2.elf makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Invoking: Print Size'
 	-avr-size --format=avr --mcu=atmega32 NTI_FinalProject_ECU2.elf
 	@echo 'Finished building: $@'
@@ -91,7 +106,6 @@ clean:
 
 secondary-outputs: $(LSS) $(FLASH_IMAGE) $(SIZEDUMMY)
 
-.PHONY: all clean dependents
-.SECONDARY:
+.PHONY: all clean dependents main-build
 
 -include ../makefile.targets

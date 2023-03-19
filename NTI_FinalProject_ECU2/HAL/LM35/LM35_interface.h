@@ -11,6 +11,8 @@
 
 #include "ADC_interface.h"
 #include "STD_TYPES.h"
+#include "LM35_config.h"
+
 
 /*** HOW to use
  * - You provide ADC_config_t structure with the desired ADC configurations
@@ -25,6 +27,6 @@ void H_LM35_void_Init();
  * - The function does a 1-shoot ADC conversion and return the Temperature
  * - The function uses the non-blocking ADC reading function, but H_LM35_u16_ReadTemprature itself
  *   blocks the code because it loops until the Reading function returns ADC_SUCCEED  ***/
-u16 H_LM35_u16_ReadTemprature(ADC_channel_t channel);
+u8 H_LM35_u8_ReadTemprature();
 
 #endif /* LM35_LM35_INTERFACE_H_ */

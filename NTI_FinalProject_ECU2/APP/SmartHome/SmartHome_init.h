@@ -13,21 +13,33 @@
 //#include "LDR_config.h"
 #include "string.h"
 #include "WIFI_init.h"
-
+#include "LM35_interface.h"
 #include "SmartHome_priv.h"
 #include "SmartHome_types.h"
+#include "SmartHome_cfg.h"
 
+#include "Led_int.h"
 
 
 /*Functions Prototypes*/
 
- /*Light Intensity functions prototypes*/
+/*Sensors HUB*/
+void APP_SmartHome_void_UpdateSensorsHub();
+
+/*Light Intensity functions prototypes*/
 void APP_SmartHome_void_LightIntensity_init();
 u8  APP_SmartHome_u8_GetIntensityLevel();
 
+/*Fan Speed & Temperature functions prototypes*/
+void APP_SmartHome_void_TemperatureSensor_init();
+u8 APP_SmartHome_u8_GetTemperature();
+u8 APP_SmartHome_u8_GetFanSpeed(); //gets fan speed out of temperature
+
+
 /*Appliances functions prototypes*/
-void APP_SmartHome_void_UpdateAppliance();
-APP_COMMAND_ERROR_t APP_SmartHome_ERROR_t_GetAppliancesState(APP_Command_t command);
+APP_COMMAND_ERROR_t APP_SmartHome_ERROR_t_LocalUpdateFromWIFI(APP_Command_t command);
+void APP_SmartHome_void_LocalUpdateFromSensorsHub();
+void APP_SmartHome_void_ApplianceUpdate();
 
 /*TCP functions prototypes*/
 void APP_void_StartWIFIserver(void);

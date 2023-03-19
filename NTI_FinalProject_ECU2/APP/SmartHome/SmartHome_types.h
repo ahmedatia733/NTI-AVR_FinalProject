@@ -56,6 +56,40 @@ typedef enum{
 	SUCCEEDED,
 }APP_COMMAND_ERROR_t;
 
+typedef enum{
+	APP_PA0 = 10,
+	APP_PA1 ,
+	APP_PA2 ,
+	APP_PA3 ,
+	APP_PA4 ,
+	APP_PA5 ,
+	APP_PA6 ,
+	APP_PA7 ,
+	APP_PB0 = 20,
+	APP_PB1 ,
+	APP_PB2 ,
+	APP_PB3 ,
+	APP_PB4 ,
+	APP_PB5 ,
+	APP_PB6 ,
+	APP_PB7 ,
+	APP_PC0 = 30,
+	APP_PC1 ,
+	APP_PC2 ,
+	APP_PC3 ,
+	APP_PC4 ,
+	APP_PC5 ,
+	APP_PC6 ,
+	APP_PC7 ,
+	APP_PD0 = 40,
+	APP_PD1 ,
+	APP_PD2 ,
+	APP_PD3 ,
+	APP_PD4 ,
+	APP_PD5 ,
+	APP_PD6 ,
+	APP_PD7
+}APP_Channel_t;
 
 typedef enum
 {
@@ -79,5 +113,17 @@ typedef struct{
 	char command_type[3];   //AV  , DV  , M
 	char value[3];	   //"0" : "100"
 }APP_Command_t;
+
+typedef struct{
+
+	u8 temperature;
+	u8 illumin;
+	u8 speed;
+	u8 intensity;
+
+}APP_SensorsHub_t;
+
+
+
 
 #endif /* APP_TYPES_H_ */

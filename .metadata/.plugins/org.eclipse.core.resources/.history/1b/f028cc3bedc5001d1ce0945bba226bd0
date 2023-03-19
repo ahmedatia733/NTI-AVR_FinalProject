@@ -1,0 +1,32 @@
+/*
+ * LM35_interface.h
+ *
+ *  Created on: Mar 16, 2023
+ *      Author: alish
+ */
+
+#ifndef LM35_LM35_INTERFACE_H_
+#define LM35_LM35_INTERFACE_H_
+
+
+#include "ADC_interface.h"
+#include "STD_TYPES.h"
+#include "LM35_config.h"
+
+
+/*** HOW to use
+ * - You provide ADC_config_t structure with the desired ADC configurations
+ *   to read LM35 outputs.
+ *  ***/
+void H_LM35_void_Init();
+
+
+/***
+ * - After initializing the ADC reading LM35 through H_LM35_void_Init
+ * - You provide the channel that LM35 is connected to
+ * - The function does a 1-shoot ADC conversion and return the Temperature
+ * - The function uses the non-blocking ADC reading function, but H_LM35_u16_ReadTemprature itself
+ *   blocks the code because it loops until the Reading function returns ADC_SUCCEED  ***/
+u16 H_LM35_u16_ReadTemprature();
+
+#endif /* LM35_LM35_INTERFACE_H_ */

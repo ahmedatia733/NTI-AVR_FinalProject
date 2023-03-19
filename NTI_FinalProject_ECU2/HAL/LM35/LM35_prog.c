@@ -19,7 +19,7 @@ void H_LM35_void_Init(){
 	M_ADC_void_Init(LM35_ADC_config_struct);
 }
 
-u16 H_LM35_u16_ReadTemprature(ADC_channel_t channel){
+u8 H_LM35_u8_ReadTemprature(){
 
 /*
  * //Negative values handling
@@ -50,7 +50,7 @@ u16 H_LM35_u16_ReadTemprature(ADC_channel_t channel){
 		M_ADC_void_StartConversion();
 
 		while(state == ADC_FAILED){
-			state = M_ADC_void_GetDigitalValueSynchNonBlocking(channel, &ADC_result);
+			state = M_ADC_void_GetDigitalValueSynchNonBlocking(LM35_ADC_CHANNEL, &ADC_result);
 		}
 		readings[i] = ADC_result;
 		_delay_us(100);

@@ -2,6 +2,8 @@ Archive member included because of file (symbol)
 
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
                               ./MCAL/PORT/Port_prog.o (__udivmodqi4)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                              ./APP/SmartHome/SmartHome_prog.o (__udivmodhi4)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
                               ./APP/millis/millis.o (__udivmodsi4)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
@@ -48,8 +50,18 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_eq_sf.o) (__fpcmp_parts_f)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o) (__clz_tab)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok.o)
+                              ./APP/SmartHome/SmartHome_prog.o (strtok)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                              ./APP/SmartHome/SmartHome_prog.o (strcmp)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                              ./APP/SmartHome/SmartHome_prog.o (strcpy)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
                               ./HAL/WIFI/WIFI_prog.o (strstr)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok_r.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok.o) (strtok_r)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+                              ./APP/SmartHome/SmartHome_prog.o (itoa)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
                               ./HAL/WIFI/WIFI_prog.o (sprintf)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
@@ -58,6 +70,8 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strn
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (strnlen_P)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (strnlen)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o) (strrev)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o) (fputc)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
@@ -67,6 +81,7 @@ Allocating common symbols
 Common symbol       size              file
 
 buff                0x64              ./HAL/WIFI/WIFI_prog.o
+SensorsHUB          0x4               ./CONFIG/APPCfg/SmartHome_Lcfg.o
 timer1_millis       0x4               ./HAL/WIFI/WIFI_prog.o
 RX_Buffer_Overflow_UART
                     0x1               ./MCAL/UART/UART_prog.o
@@ -94,6 +109,7 @@ LOAD ./MCAL/DIO/Dio_prog.o
 LOAD ./MCAL/ADC/ADC_prog.o
 LOAD ./HAL/WIFI/WIFI_prog.o
 LOAD ./HAL/LM35/LM35_prog.o
+LOAD ./HAL/LED/Led_prog.o
 LOAD ./HAL/LDR/LDR_prog.o
 LOAD ./HAL/LCD/LCD_prg.o
 LOAD ./HAL/DC_MOTOR/DC_MOTOR_prog.o
@@ -105,6 +121,7 @@ LOAD ./CONFIG/EX_INT_Lconfig.o
 LOAD ./CONFIG/LCD_Lcfg.o
 LOAD ./CONFIG/LDR_Lconfig.o
 LOAD ./CONFIG/LM35_Lconfig.o
+LOAD ./CONFIG/Led_Lcfg.o
 LOAD ./CONFIG/Port_Lcfg.o
 LOAD ./CONFIG/TIM_Lconfig.o
 LOAD ./CONFIG/UART_Lcfg.o
@@ -206,7 +223,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x46ec
+.text           0x00000000     0x508e
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -288,6 +305,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text          0x00000092        0x0 ./MCAL/ADC/ADC_prog.o
  .text          0x00000092        0x0 ./HAL/WIFI/WIFI_prog.o
  .text          0x00000092        0x0 ./HAL/LM35/LM35_prog.o
+ .text          0x00000092        0x0 ./HAL/LED/Led_prog.o
  .text          0x00000092        0x0 ./HAL/LDR/LDR_prog.o
  .text          0x00000092        0x0 ./HAL/LCD/LCD_prg.o
  .text          0x00000092        0x0 ./HAL/DC_MOTOR/DC_MOTOR_prog.o
@@ -299,6 +317,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text          0x00000092        0x0 ./CONFIG/LCD_Lcfg.o
  .text          0x00000092        0x0 ./CONFIG/LDR_Lconfig.o
  .text          0x00000092        0x0 ./CONFIG/LM35_Lconfig.o
+ .text          0x00000092        0x0 ./CONFIG/Led_Lcfg.o
  .text          0x00000092        0x0 ./CONFIG/Port_Lcfg.o
  .text          0x00000092        0x0 ./CONFIG/TIM_Lconfig.o
  .text          0x00000092        0x0 ./CONFIG/UART_Lcfg.o
@@ -307,6 +326,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text          0x00000092        0x0 ./APP/SmartHome/SmartHome_prog.o
  .text          0x00000092        0x0 ./APP/main.o
  .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+ .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
  .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
  .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
  .text          0x00000092        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
@@ -345,11 +365,17 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text          0x00000ddc       0xb2 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
                 0x00000ddc                __fpcmp_parts_f
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+ .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok.o)
+ .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcmp.o)
+ .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcpy.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
+ .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok_r.o)
+ .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
  .text          0x00000e8e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
                 0x00000e8e                . = ALIGN (0x2)
@@ -438,96 +464,155 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text.H_LM35_void_Init
                 0x00002aee       0x26 ./HAL/LM35/LM35_prog.o
                 0x00002aee                H_LM35_void_Init
- .text.H_LM35_u16_ReadTemprature
-                0x00002b14      0x394 ./HAL/LM35/LM35_prog.o
-                0x00002b14                H_LM35_u16_ReadTemprature
+ .text.H_LM35_u8_ReadTemprature
+                0x00002b14      0x386 ./HAL/LM35/LM35_prog.o
+                0x00002b14                H_LM35_u8_ReadTemprature
+ .text.H_LED_voidTurnOn
+                0x00002e9a       0x7e ./HAL/LED/Led_prog.o
+                0x00002e9a                H_LED_voidTurnOn
+ .text.H_LED_voidTurnOff
+                0x00002f18       0x7e ./HAL/LED/Led_prog.o
+                0x00002f18                H_LED_voidTurnOff
+ .text.H_LED_voidToggle
+                0x00002f96       0x76 ./HAL/LED/Led_prog.o
+                0x00002f96                H_LED_voidToggle
  .text.H_LDR_void_Init
-                0x00002ea8       0x26 ./HAL/LDR/LDR_prog.o
-                0x00002ea8                H_LDR_void_Init
+                0x0000300c       0x26 ./HAL/LDR/LDR_prog.o
+                0x0000300c                H_LDR_void_Init
  .text.H_LDR_u16_Read
-                0x00002ece      0x348 ./HAL/LDR/LDR_prog.o
-                0x00002ece                H_LDR_u16_Read
+                0x00003032      0x346 ./HAL/LDR/LDR_prog.o
+                0x00003032                H_LDR_u16_Read
  .text.H_LCD_void_LachByte
-                0x00003216       0x24 ./HAL/LCD/LCD_prg.o
+                0x00003378       0x24 ./HAL/LCD/LCD_prg.o
  .text.H_LCD_void_LachNibble
-                0x0000323a      0x46a ./HAL/LCD/LCD_prg.o
+                0x0000339c      0x46a ./HAL/LCD/LCD_prg.o
  .text.H_LCD_void_SendCommand
-                0x000036a4       0x22 ./HAL/LCD/LCD_prg.o
-                0x000036a4                H_LCD_void_SendCommand
+                0x00003806       0x22 ./HAL/LCD/LCD_prg.o
+                0x00003806                H_LCD_void_SendCommand
  .text.H_LCD_void_Clear
-                0x000036c6       0x14 ./HAL/LCD/LCD_prg.o
-                0x000036c6                H_LCD_void_Clear
+                0x00003828       0x14 ./HAL/LCD/LCD_prg.o
+                0x00003828                H_LCD_void_Clear
  .text.H_LCD_void_SendData
-                0x000036da       0x22 ./HAL/LCD/LCD_prg.o
-                0x000036da                H_LCD_void_SendData
+                0x0000383c       0x22 ./HAL/LCD/LCD_prg.o
+                0x0000383c                H_LCD_void_SendData
  .text.H_LCD_void_sendString
-                0x000036fc       0x60 ./HAL/LCD/LCD_prg.o
-                0x000036fc                H_LCD_void_sendString
+                0x0000385e       0x60 ./HAL/LCD/LCD_prg.o
+                0x0000385e                H_LCD_void_sendString
  .text.H_LCD_void_sendIntNum
-                0x0000375c       0xec ./HAL/LCD/LCD_prg.o
-                0x0000375c                H_LCD_void_sendIntNum
+                0x000038be       0xec ./HAL/LCD/LCD_prg.o
+                0x000038be                H_LCD_void_sendIntNum
  .text.H_LCD_void_Int
-                0x00003848      0x522 ./HAL/LCD/LCD_prg.o
-                0x00003848                H_LCD_void_Int
+                0x000039aa      0x522 ./HAL/LCD/LCD_prg.o
+                0x000039aa                H_LCD_void_Int
  .text.__vector_7
-                0x00003d6a       0x56 ./APP/millis/millis.o
-                0x00003d6a                __vector_7
+                0x00003ecc       0x56 ./APP/millis/millis.o
+                0x00003ecc                __vector_7
  .text.init_millis
-                0x00003dc0       0x8c ./APP/millis/millis.o
-                0x00003dc0                init_millis
- .text.millis   0x00003e4c       0x5e ./APP/millis/millis.o
-                0x00003e4c                millis
+                0x00003f22       0x8c ./APP/millis/millis.o
+                0x00003f22                init_millis
+ .text.millis   0x00003fae       0x5e ./APP/millis/millis.o
+                0x00003fae                millis
  .text.__iCliRetVal
-                0x00003eaa       0x12 ./APP/millis/millis.o
+                0x0000400c       0x12 ./APP/millis/millis.o
  .text.__iSeiParam
-                0x00003ebc       0x1a ./APP/millis/millis.o
+                0x0000401e       0x1a ./APP/millis/millis.o
+ .text.APP_SmartHome_void_UpdateSensorsHub
+                0x00004038       0x2e ./APP/SmartHome/SmartHome_prog.o
+                0x00004038                APP_SmartHome_void_UpdateSensorsHub
+ .text.APP_SmartHome_void_LightIntensity_init
+                0x00004066       0x12 ./APP/SmartHome/SmartHome_prog.o
+                0x00004066                APP_SmartHome_void_LightIntensity_init
+ .text.APP_SmartHome_u8_GetIntensityLevel
+                0x00004078       0x3e ./APP/SmartHome/SmartHome_prog.o
+                0x00004078                APP_SmartHome_u8_GetIntensityLevel
+ .text.APP_SmartHome_void_TemperatureSensor_init
+                0x000040b6       0x12 ./APP/SmartHome/SmartHome_prog.o
+                0x000040b6                APP_SmartHome_void_TemperatureSensor_init
+ .text.APP_SmartHome_u8_GetTemperature
+                0x000040c8       0x1a ./APP/SmartHome/SmartHome_prog.o
+                0x000040c8                APP_SmartHome_u8_GetTemperature
+ .text.APP_SmartHome_u8_GetFanSpeed
+                0x000040e2       0x46 ./APP/SmartHome/SmartHome_prog.o
+                0x000040e2                APP_SmartHome_u8_GetFanSpeed
+ .text.APP_SmartHome_ERROR_t_LocalUpdateFromWIFI
+                0x00004128      0x19a ./APP/SmartHome/SmartHome_prog.o
+                0x00004128                APP_SmartHome_ERROR_t_LocalUpdateFromWIFI
+ .text.APP_SmartHome_void_LocalUpdateFromSensorsHub
+                0x000042c2       0xbc ./APP/SmartHome/SmartHome_prog.o
+                0x000042c2                APP_SmartHome_void_LocalUpdateFromSensorsHub
+ .text.APP_SmartHome_void_ApplianceUpdate
+                0x0000437e       0x40 ./APP/SmartHome/SmartHome_prog.o
+                0x0000437e                APP_SmartHome_void_ApplianceUpdate
+ .text.APP_SmartHome_ERROR_t_GetCommand
+                0x000043be      0x19a ./APP/SmartHome/SmartHome_prog.o
+                0x000043be                APP_SmartHome_ERROR_t_GetCommand
  .text.APP_void_StartWIFIserver
-                0x00003ed6       0x32 ./APP/SmartHome/SmartHome_prog.o
-                0x00003ed6                APP_void_StartWIFIserver
+                0x00004558       0x32 ./APP/SmartHome/SmartHome_prog.o
+                0x00004558                APP_void_StartWIFIserver
  .text.APP_UpdateStatus_t_WIFIUpdate
-                0x00003f08       0x32 ./APP/SmartHome/SmartHome_prog.o
-                0x00003f08                APP_UpdateStatus_t_WIFIUpdate
- .text.main     0x00003f3a      0x138 ./APP/main.o
-                0x00003f3a                main
- .text.libgcc   0x00004072       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
-                0x00004072                __udivmodqi4
- .text.libgcc   0x0000408a       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
-                0x0000408a                __udivmodsi4
- .text.libgcc   0x000040ce       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
-                0x000040ce                __divmodsi4
- .text.libgcc   0x00004104        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x00004104        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x00004104        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x00004104       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x00004104                __prologue_saves__
- .text.libgcc   0x0000413c       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x0000413c                __epilogue_restores__
+                0x0000458a       0x32 ./APP/SmartHome/SmartHome_prog.o
+                0x0000458a                APP_UpdateStatus_t_WIFIUpdate
+ .text.main     0x000045bc      0x356 ./APP/main.o
+                0x000045bc                main
+ .text.libgcc   0x00004912       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+                0x00004912                __udivmodqi4
+ .text.libgcc   0x0000492a       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000492a                __udivmodhi4
+ .text.libgcc   0x00004952       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x00004952                __udivmodsi4
+ .text.libgcc   0x00004996       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+                0x00004996                __divmodsi4
+ .text.libgcc   0x000049cc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000049cc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000049cc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000049cc       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x000049cc                __prologue_saves__
+ .text.libgcc   0x00004a04       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00004a04                __epilogue_restores__
  .text.avr-libc
-                0x00004172       0x34 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
-                0x00004172                strstr
+                0x00004a3a        0xa c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok.o)
+                0x00004a3a                strtok
  .text.avr-libc
-                0x000041a6       0x48 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x000041a6                sprintf
+                0x00004a44       0x12 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x00004a44                strcmp
  .text.avr-libc
-                0x000041ee      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x000041ee                vfprintf
+                0x00004a56        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00004a56                strcpy
  .text.avr-libc
-                0x000045a8       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x000045a8                strnlen_P
+                0x00004a64       0x34 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
+                0x00004a64                strstr
  .text.avr-libc
-                0x000045be       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x000045be                strnlen
+                0x00004a98       0x4e c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok_r.o)
+                0x00004a98                strtok_r
  .text.avr-libc
-                0x000045d4       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x000045d4                fputc
+                0x00004ae6       0x42 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x00004ae6                itoa
  .text.avr-libc
-                0x0000462c       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x0000462c                __ultoa_invert
-                0x000046e8                . = ALIGN (0x2)
+                0x00004b28       0x48 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00004b28                sprintf
+ .text.avr-libc
+                0x00004b70      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00004b70                vfprintf
+ .text.avr-libc
+                0x00004f2a       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00004f2a                strnlen_P
+ .text.avr-libc
+                0x00004f40       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00004f40                strnlen
+ .text.avr-libc
+                0x00004f56       0x20 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00004f56                strrev
+ .text.avr-libc
+                0x00004f76       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00004f76                fputc
+ .text.avr-libc
+                0x00004fce       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00004fce                __ultoa_invert
+                0x0000508a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000046e8        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x000046e8                exit
-                0x000046e8                _exit
+ .fini9         0x0000508a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000508a                exit
+                0x0000508a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -546,11 +631,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000046e8        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000508a        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000046ec                _etext = .
+                0x0000508e                _etext = .
 
-.data           0x00800060      0x3de load address 0x000046ec
+.data           0x00800060      0x422 load address 0x0000508e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -562,6 +647,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .data          0x00800060        0x0 ./MCAL/ADC/ADC_prog.o
  .data          0x00800060       0xf8 ./HAL/WIFI/WIFI_prog.o
  .data          0x00800158        0x0 ./HAL/LM35/LM35_prog.o
+ .data          0x00800158        0x0 ./HAL/LED/Led_prog.o
  .data          0x00800158        0x0 ./HAL/LDR/LDR_prog.o
  .data          0x00800158        0x0 ./HAL/LCD/LCD_prg.o
  .data          0x00800158        0x0 ./HAL/DC_MOTOR/DC_MOTOR_prog.o
@@ -573,183 +659,213 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .data          0x00800158        0x0 ./CONFIG/LCD_Lcfg.o
  .data          0x00800158        0x0 ./CONFIG/LDR_Lconfig.o
  .data          0x00800158        0x0 ./CONFIG/LM35_Lconfig.o
+ .data          0x00800158        0x0 ./CONFIG/Led_Lcfg.o
  .data          0x00800158        0x0 ./CONFIG/Port_Lcfg.o
  .data          0x00800158        0x0 ./CONFIG/TIM_Lconfig.o
  .data          0x00800158        0x0 ./CONFIG/UART_Lcfg.o
  .data          0x00800158       0x1c ./CONFIG/WIFI_Lcfg.o
  .data          0x00800174        0x0 ./APP/millis/millis.o
- .data          0x00800174        0x0 ./APP/SmartHome/SmartHome_prog.o
- .data          0x00800174       0x16 ./APP/main.o
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_div_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_eq_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_gt_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_lt_sf.o)
- .data          0x0080018a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
- .data          0x0080018a        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
-                0x0080018a                __thenan_sf
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
- .data          0x00800192        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
- .data          0x00800192      0x100 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
-                0x00800192                __clz_tab
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
- .data          0x00800292        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .data          0x00800174       0x20 ./APP/SmartHome/SmartHome_prog.o
+ .data          0x00800194       0x29 ./APP/main.o
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_div_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_eq_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_gt_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_lt_sf.o)
+ .data          0x008001bd        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
+ .data          0x008001bd        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
+                0x008001bd                __thenan_sf
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
+ .data          0x008001c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
+ .data          0x008001c5      0x100 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+                0x008001c5                __clz_tab
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcmp.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcpy.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok_r.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .data          0x008002c5        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
  *(.data*)
  .data.DEVICES_STATE_LIST
-                0x00800292       0x1c ./CONFIG/APPCfg/SmartHome_Lcfg.o
-                0x00800292                DEVICES_STATE_LIST
+                0x008002c5       0x1c ./CONFIG/APPCfg/SmartHome_Lcfg.o
+                0x008002c5                DEVICES_STATE_LIST
  .data.LDR_ADC_config_struct
-                0x008002ae        0x5 ./CONFIG/ADC_Lconfig.o
-                0x008002ae                LDR_ADC_config_struct
+                0x008002e1        0x5 ./CONFIG/ADC_Lconfig.o
+                0x008002e1                LDR_ADC_config_struct
  .data.LM35_ADC_config_struct
-                0x008002b3        0x5 ./CONFIG/ADC_Lconfig.o
-                0x008002b3                LM35_ADC_config_struct
+                0x008002e6        0x5 ./CONFIG/ADC_Lconfig.o
+                0x008002e6                LM35_ADC_config_struct
  .data.EX_INT_sources_arr
-                0x008002b8        0x9 ./CONFIG/EX_INT_Lconfig.o
-                0x008002b8                EX_INT_sources_arr
+                0x008002eb        0x9 ./CONFIG/EX_INT_Lconfig.o
+                0x008002eb                EX_INT_sources_arr
  .data.lm35_adc_config
-                0x008002c1        0x5 ./CONFIG/LM35_Lconfig.o
-                0x008002c1                lm35_adc_config
+                0x008002f4        0x5 ./CONFIG/LM35_Lconfig.o
+                0x008002f4                lm35_adc_config
  .data.UART_config
-                0x008002c6        0x4 ./CONFIG/UART_Lcfg.o
-                0x008002c6                UART_config
+                0x008002f9        0x4 ./CONFIG/UART_Lcfg.o
+                0x008002f9                UART_config
  .data.WIFI_Config
-                0x008002ca        0x7 ./CONFIG/WIFI_Lcfg.o
-                0x008002ca                WIFI_Config
+                0x008002fd        0x7 ./CONFIG/WIFI_Lcfg.o
+                0x008002fd                WIFI_Config
+ .data.devices_names
+                0x00800304        0x4 ./APP/SmartHome/SmartHome_prog.o
+                0x00800304                devices_names
+ .data.devices_modes
+                0x00800308        0x4 ./APP/SmartHome/SmartHome_prog.o
+                0x00800308                devices_modes
+ .data.devices_states
+                0x0080030c        0x4 ./APP/SmartHome/SmartHome_prog.o
+                0x0080030c                devices_states
+ .data.devices_commands
+                0x00800310        0x6 ./APP/SmartHome/SmartHome_prog.o
+                0x00800310                devices_commands
  *(.rodata)
  *(.rodata*)
  .rodata.Port_ConfigArr
-                0x008002d1       0x64 ./CONFIG/Port_Lcfg.o
-                0x008002d1                Port_ConfigArr
+                0x00800316       0x64 ./CONFIG/Port_Lcfg.o
+                0x00800316                Port_ConfigArr
  .rodata.SmallOS_PortConfig_ARR
-                0x00800335       0x50 ./CONFIG/Port_Lcfg.o
-                0x00800335                SmallOS_PortConfig_ARR
+                0x0080037a       0x50 ./CONFIG/Port_Lcfg.o
+                0x0080037a                SmallOS_PortConfig_ARR
  .rodata.Configurable_Duty_freq_Port_ConfigArr
-                0x00800385       0x5c ./CONFIG/Port_Lcfg.o
-                0x00800385                Configurable_Duty_freq_Port_ConfigArr
+                0x008003ca       0x5c ./CONFIG/Port_Lcfg.o
+                0x008003ca                Configurable_Duty_freq_Port_ConfigArr
  .rodata.LoginSystem_Port_ConfigArr
-                0x008003e1       0x5c ./CONFIG/Port_Lcfg.o
-                0x008003e1                LoginSystem_Port_ConfigArr
+                0x00800426       0x5c ./CONFIG/Port_Lcfg.o
+                0x00800426                LoginSystem_Port_ConfigArr
  *(.gnu.linkonce.d*)
-                0x0080043e                . = ALIGN (0x2)
- *fill*         0x0080043d        0x1 00
-                0x0080043e                _edata = .
-                0x0080043e                PROVIDE (__data_end, .)
+                0x00800482                . = ALIGN (0x2)
+                0x00800482                _edata = .
+                0x00800482                PROVIDE (__data_end, .)
 
-.bss            0x0080043e       0xd5
-                0x0080043e                PROVIDE (__bss_start, .)
+.bss            0x00800482       0xdb
+                0x00800482                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
- .bss           0x0080043e        0x0 ./MCAL/UART/UART_prog.o
- .bss           0x0080043e        0x0 ./MCAL/PORT/Port_prog.o
- .bss           0x0080043e        0x0 ./MCAL/GIE/GIE_prog.o
- .bss           0x0080043e        0x0 ./MCAL/EX_INT/EX_INT_prog.o
- .bss           0x0080043e        0x0 ./MCAL/DIO/Dio_prog.o
- .bss           0x0080043e        0x0 ./MCAL/ADC/ADC_prog.o
- .bss           0x0080043e        0x0 ./HAL/WIFI/WIFI_prog.o
- .bss           0x0080043e        0x0 ./HAL/LM35/LM35_prog.o
- .bss           0x0080043e        0x0 ./HAL/LDR/LDR_prog.o
- .bss           0x0080043e        0x0 ./HAL/LCD/LCD_prg.o
- .bss           0x0080043e        0x0 ./HAL/DC_MOTOR/DC_MOTOR_prog.o
- .bss           0x0080043e        0x0 ./CONFIG/APPCfg/SmartHome_Lcfg.o
- .bss           0x0080043e        0x0 ./CONFIG/ADC_Lconfig.o
- .bss           0x0080043e        0x0 ./CONFIG/DC_MOTOR_Lconfig.o
- .bss           0x0080043e        0x0 ./CONFIG/Dio_Lcfg.o
- .bss           0x0080043e        0x0 ./CONFIG/EX_INT_Lconfig.o
- .bss           0x0080043e        0x0 ./CONFIG/LCD_Lcfg.o
- .bss           0x0080043e        0x0 ./CONFIG/LDR_Lconfig.o
- .bss           0x0080043e        0x0 ./CONFIG/LM35_Lconfig.o
- .bss           0x0080043e        0x0 ./CONFIG/Port_Lcfg.o
- .bss           0x0080043e        0x0 ./CONFIG/TIM_Lconfig.o
- .bss           0x0080043e        0x0 ./CONFIG/UART_Lcfg.o
- .bss           0x0080043e        0x0 ./CONFIG/WIFI_Lcfg.o
- .bss           0x0080043e        0x0 ./APP/millis/millis.o
- .bss           0x0080043e        0x0 ./APP/SmartHome/SmartHome_prog.o
- .bss           0x0080043e        0x0 ./APP/main.o
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_div_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_eq_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_gt_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_lt_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
- .bss           0x0080043e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ .bss           0x00800482        0x0 ./MCAL/UART/UART_prog.o
+ .bss           0x00800482        0x0 ./MCAL/PORT/Port_prog.o
+ .bss           0x00800482        0x0 ./MCAL/GIE/GIE_prog.o
+ .bss           0x00800482        0x0 ./MCAL/EX_INT/EX_INT_prog.o
+ .bss           0x00800482        0x0 ./MCAL/DIO/Dio_prog.o
+ .bss           0x00800482        0x0 ./MCAL/ADC/ADC_prog.o
+ .bss           0x00800482        0x0 ./HAL/WIFI/WIFI_prog.o
+ .bss           0x00800482        0x0 ./HAL/LM35/LM35_prog.o
+ .bss           0x00800482        0x0 ./HAL/LED/Led_prog.o
+ .bss           0x00800482        0x0 ./HAL/LDR/LDR_prog.o
+ .bss           0x00800482        0x0 ./HAL/LCD/LCD_prg.o
+ .bss           0x00800482        0x0 ./HAL/DC_MOTOR/DC_MOTOR_prog.o
+ .bss           0x00800482        0x0 ./CONFIG/APPCfg/SmartHome_Lcfg.o
+ .bss           0x00800482        0x0 ./CONFIG/ADC_Lconfig.o
+ .bss           0x00800482        0x0 ./CONFIG/DC_MOTOR_Lconfig.o
+ .bss           0x00800482        0x0 ./CONFIG/Dio_Lcfg.o
+ .bss           0x00800482        0x0 ./CONFIG/EX_INT_Lconfig.o
+ .bss           0x00800482        0x0 ./CONFIG/LCD_Lcfg.o
+ .bss           0x00800482        0x0 ./CONFIG/LDR_Lconfig.o
+ .bss           0x00800482        0x0 ./CONFIG/LM35_Lconfig.o
+ .bss           0x00800482        0x0 ./CONFIG/Led_Lcfg.o
+ .bss           0x00800482        0x0 ./CONFIG/Port_Lcfg.o
+ .bss           0x00800482        0x0 ./CONFIG/TIM_Lconfig.o
+ .bss           0x00800482        0x0 ./CONFIG/UART_Lcfg.o
+ .bss           0x00800482        0x0 ./CONFIG/WIFI_Lcfg.o
+ .bss           0x00800482        0x0 ./APP/millis/millis.o
+ .bss           0x00800482        0x0 ./APP/SmartHome/SmartHome_prog.o
+ .bss           0x00800482        0x0 ./APP/main.o
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodsi4.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_mul_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_div_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_eq_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_gt_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_ge_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_lt_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_sf_to_si.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_thenan_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_usi_to_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clzsi2.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_pack_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_unpack_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fpcmp_parts_sf.o)
+ .bss           0x00800482        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clz.o)
+ .bss           0x00800482        0x2 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcmp.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strcpy.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strstr.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strtok_r.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strrev.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .bss           0x00800484        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
  *(.bss*)
  .bss.RX_Wr_Index_UART
-                0x0080043e        0x1 ./MCAL/UART/UART_prog.o
-                0x0080043e                RX_Wr_Index_UART
+                0x00800484        0x1 ./MCAL/UART/UART_prog.o
+                0x00800484                RX_Wr_Index_UART
  .bss.RX_Rd_Index_UART
-                0x0080043f        0x1 ./MCAL/UART/UART_prog.o
-                0x0080043f                RX_Rd_Index_UART
+                0x00800485        0x1 ./MCAL/UART/UART_prog.o
+                0x00800485                RX_Rd_Index_UART
  .bss.RX_Counter_UART
-                0x00800440        0x1 ./MCAL/UART/UART_prog.o
-                0x00800440                RX_Counter_UART
+                0x00800486        0x1 ./MCAL/UART/UART_prog.o
+                0x00800486                RX_Counter_UART
  .bss.ADC_CallBackPTR
-                0x00800441        0x2 ./MCAL/ADC/ADC_prog.o
+                0x00800487        0x2 ./MCAL/ADC/ADC_prog.o
  .bss.ADC_ADJUSTMENT
-                0x00800443        0x1 ./MCAL/ADC/ADC_prog.o
-                0x00800443                ADC_ADJUSTMENT
+                0x00800489        0x1 ./MCAL/ADC/ADC_prog.o
+                0x00800489                ADC_ADJUSTMENT
  .bss.stCounter.1399
-                0x00800444        0x1 ./HAL/LCD/LCD_prg.o
+                0x0080048a        0x1 ./HAL/LCD/LCD_prg.o
  *(COMMON)
- COMMON         0x00800445       0x66 ./MCAL/UART/UART_prog.o
-                0x00800445                RX_Buffer_Overflow_UART
-                0x00800446                Rx_Buffer_UART
- COMMON         0x008004ab       0x68 ./HAL/WIFI/WIFI_prog.o
-                0x008004ab                buff
-                0x0080050f                timer1_millis
-                0x00800513                PROVIDE (__bss_end, .)
-                0x000046ec                __data_load_start = LOADADDR (.data)
-                0x00004aca                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080048b       0x66 ./MCAL/UART/UART_prog.o
+                0x0080048b                RX_Buffer_Overflow_UART
+                0x0080048c                Rx_Buffer_UART
+ COMMON         0x008004f1       0x68 ./HAL/WIFI/WIFI_prog.o
+                0x008004f1                buff
+                0x00800555                timer1_millis
+ COMMON         0x00800559        0x4 ./CONFIG/APPCfg/SmartHome_Lcfg.o
+                0x00800559                SensorsHUB
+                0x0080055d                PROVIDE (__bss_end, .)
+                0x0000508e                __data_load_start = LOADADDR (.data)
+                0x000054b0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800513        0x0
-                0x00800513                PROVIDE (__noinit_start, .)
+.noinit         0x0080055d        0x0
+                0x0080055d                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800513                PROVIDE (__noinit_end, .)
-                0x00800513                _end = .
-                0x00800513                PROVIDE (__heap_start, .)
+                0x0080055d                PROVIDE (__noinit_end, .)
+                0x0080055d                _end = .
+                0x0080055d                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -767,7 +883,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .signature
  *(.signature*)
 
-.stab           0x00000000     0x5064
+.stab           0x00000000     0x5d6c
  *(.stab)
  .stab          0x00000000      0x7e0 ./MCAL/UART/UART_prog.o
  .stab          0x000007e0      0x4a4 ./MCAL/PORT/Port_prog.o
@@ -782,48 +898,52 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                                 0x4d4 (size before relaxing)
  .stab          0x00001878      0xc78 ./HAL/WIFI/WIFI_prog.o
                                 0xe94 (size before relaxing)
- .stab          0x000024f0      0x444 ./HAL/LM35/LM35_prog.o
-                                0x750 (size before relaxing)
- .stab          0x00002934      0x408 ./HAL/LDR/LDR_prog.o
-                                0x720 (size before relaxing)
- .stab          0x00002d3c      0xc18 ./HAL/LCD/LCD_prg.o
+ .stab          0x000024f0      0x438 ./HAL/LM35/LM35_prog.o
+                                0x744 (size before relaxing)
+ .stab          0x00002928      0x33c ./HAL/LED/Led_prog.o
+                                0x3c0 (size before relaxing)
+ .stab          0x00002c64      0x3fc ./HAL/LDR/LDR_prog.o
+                                0x714 (size before relaxing)
+ .stab          0x00003060      0xbac ./HAL/LCD/LCD_prg.o
                                 0xe28 (size before relaxing)
- .stab          0x00003954       0xd8 ./HAL/DC_MOTOR/DC_MOTOR_prog.o
+ .stab          0x00003c0c       0xd8 ./HAL/DC_MOTOR/DC_MOTOR_prog.o
                                  0xe4 (size before relaxing)
- .stab          0x00003a2c      0x150 ./CONFIG/APPCfg/SmartHome_Lcfg.o
-                                0x1d4 (size before relaxing)
- .stab          0x00003b7c      0x120 ./CONFIG/ADC_Lconfig.o
+ .stab          0x00003ce4      0x180 ./CONFIG/APPCfg/SmartHome_Lcfg.o
+                                0x204 (size before relaxing)
+ .stab          0x00003e64      0x120 ./CONFIG/ADC_Lconfig.o
                                 0x210 (size before relaxing)
- .stab          0x00003c9c       0xd8 ./CONFIG/DC_MOTOR_Lconfig.o
+ .stab          0x00003f84       0xd8 ./CONFIG/DC_MOTOR_Lconfig.o
                                  0xe4 (size before relaxing)
- .stab          0x00003d74       0xd8 ./CONFIG/Dio_Lcfg.o
+ .stab          0x0000405c       0xd8 ./CONFIG/Dio_Lcfg.o
                                  0xe4 (size before relaxing)
- .stab          0x00003e4c      0x114 ./CONFIG/EX_INT_Lconfig.o
+ .stab          0x00004134      0x114 ./CONFIG/EX_INT_Lconfig.o
                                 0x174 (size before relaxing)
- .stab          0x00003f60       0xd8 ./CONFIG/LCD_Lcfg.o
+ .stab          0x00004248       0xd8 ./CONFIG/LCD_Lcfg.o
                                  0xe4 (size before relaxing)
- .stab          0x00004038       0xd8 ./CONFIG/LDR_Lconfig.o
+ .stab          0x00004320       0xd8 ./CONFIG/LDR_Lconfig.o
                                  0xe4 (size before relaxing)
- .stab          0x00004110      0x144 ./CONFIG/LM35_Lconfig.o
+ .stab          0x000043f8      0x144 ./CONFIG/LM35_Lconfig.o
                                 0x2d0 (size before relaxing)
- .stab          0x00004254      0x1c8 ./CONFIG/Port_Lcfg.o
-                                0x24c (size before relaxing)
- .stab          0x0000441c       0xd8 ./CONFIG/TIM_Lconfig.o
+ .stab          0x0000453c       0xd8 ./CONFIG/Led_Lcfg.o
                                  0xe4 (size before relaxing)
- .stab          0x000044f4       0xf0 ./CONFIG/UART_Lcfg.o
+ .stab          0x00004614      0x1c8 ./CONFIG/Port_Lcfg.o
+                                0x24c (size before relaxing)
+ .stab          0x000047dc       0xd8 ./CONFIG/TIM_Lconfig.o
+                                 0xe4 (size before relaxing)
+ .stab          0x000048b4       0xf0 ./CONFIG/UART_Lcfg.o
                                 0x174 (size before relaxing)
- .stab          0x000045e4      0x168 ./CONFIG/WIFI_Lcfg.o
+ .stab          0x000049a4      0x168 ./CONFIG/WIFI_Lcfg.o
                                 0x174 (size before relaxing)
- .stab          0x0000474c      0x348 ./APP/millis/millis.o
+ .stab          0x00004b0c      0x348 ./APP/millis/millis.o
                                 0x4d4 (size before relaxing)
- .stab          0x00004a94      0x234 ./APP/SmartHome/SmartHome_prog.o
-                                0x348 (size before relaxing)
- .stab          0x00004cc8      0x39c ./APP/main.o
-                                0x78c (size before relaxing)
+ .stab          0x00004e54      0x9f0 ./APP/SmartHome/SmartHome_prog.o
+                                0xc18 (size before relaxing)
+ .stab          0x00005844      0x528 ./APP/main.o
+                                0xa80 (size before relaxing)
 
-.stabstr        0x00000000     0x4472
+.stabstr        0x00000000     0x51ce
  *(.stabstr)
- .stabstr       0x00000000     0x4472 ./MCAL/UART/UART_prog.o
+ .stabstr       0x00000000     0x51ce ./MCAL/UART/UART_prog.o
 
 .stab.excl
  *(.stab.excl)
