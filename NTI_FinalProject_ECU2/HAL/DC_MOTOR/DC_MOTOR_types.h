@@ -1,62 +1,13 @@
 /*
- * DC_MOTOR_types.h
+ * DC_Motor_types.h
  *
- *  Created on: Mar 6, 2023
- *      Author: alish
+ *  Created on: ??þ/??þ/????
+ *      Author: ahmed
  */
 
 #ifndef DC_MOTOR_DC_MOTOR_TYPES_H_
 #define DC_MOTOR_DC_MOTOR_TYPES_H_
 
-typedef enum{
-
-	DC_MOTOR_BACKWARD = 0,
-	DC_MOTOR_FORWARD = 1,
-
-	}DC_MOTOR_direction_t;
-
-
-	typedef enum{
-		DC_MOTOR_PORTA = 1,
-		DC_MOTOR_PORTB ,
-		DC_MOTOR_PORTC ,
-		DC_MOTOR_PORTD ,
-	}DC_MOTOR_Port_t; // Port means
-
-	typedef enum{
-		DC_MOTOR_PA0 = 10,
-		DC_MOTOR_PA1 ,
-		DC_MOTOR_PA2 ,
-		DC_MOTOR_PA3 ,
-		DC_MOTOR_PA4 ,
-		DC_MOTOR_PA5 ,
-		DC_MOTOR_PA6 ,
-		DC_MOTOR_PA7 ,
-		DC_MOTOR_PB0 = 20,
-		DC_MOTOR_PB1 ,
-		DC_MOTOR_PB2 ,
-		DC_MOTOR_PB3 ,
-		DC_MOTOR_PB4 ,
-		DC_MOTOR_PB5 ,
-		DC_MOTOR_PB6 ,
-		DC_MOTOR_PB7 ,
-		DC_MOTOR_PC0 = 30,
-		DC_MOTOR_PC1 ,
-		DC_MOTOR_PC2 ,
-		DC_MOTOR_PC3 ,
-		DC_MOTOR_PC4 ,
-		DC_MOTOR_PC5 ,
-		DC_MOTOR_PC6 ,
-		DC_MOTOR_PC7 ,
-		DC_MOTOR_PD0 = 40,
-		DC_MOTOR_PD1 ,
-		DC_MOTOR_PD2 ,
-		DC_MOTOR_PD3 ,
-		DC_MOTOR_PD4 ,
-		DC_MOTOR_PD5 ,
-		DC_MOTOR_PD6 ,
-		DC_MOTOR_PD7
-	}DC_MOTOR_Channel_t;
 
 
 #endif /* DC_MOTOR_DC_MOTOR_TYPES_H_ */
